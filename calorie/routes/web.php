@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/calendar', [CalendarController::class, 'show'])->name('calorie.calendar');
+    Route::get('/input', [FollowController::class, 'input'])->name('calorie.input');
 });
 
 require __DIR__ . '/auth.php';
+
