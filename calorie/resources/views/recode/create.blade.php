@@ -10,9 +10,6 @@
 </head>
 
 <body>
-    <?php
-    $ingredients = ['卵', 'ご飯', '醤油'];
-    ?>
     <div class="container">
         <h1> 今日の記録 </h1>
         <form method="post" action="">
@@ -20,8 +17,8 @@
             <select name="op">
                 <option value="---">---</option>
                 <!-- 以下の部分はfoodテーブルからデータを持ってくる必要があります -->
-                @foreach ($categories as $category)
-                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                @foreach ($foods as $food)
+                    <option value="{{ $food->name }}">{{ $food->name }}</option>
                 @endforeach
             </select>
             <br>
@@ -51,7 +48,7 @@
                 <option value="---">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient . '">' . $ingredient . '</option>';
+                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
@@ -60,7 +57,7 @@
                 <option value="---">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient . '">' . $ingredient . '</option>';
+                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
@@ -69,7 +66,7 @@
                 <option value="---">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient . '">' . $ingredient . '</option>';
+                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
@@ -78,7 +75,7 @@
                 <option value="---">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient . '">' . $ingredient . '</option>';
+                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
@@ -87,7 +84,7 @@
                 <option value="---">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient . '">' . $ingredient . '</option>';
+                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
