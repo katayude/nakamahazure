@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Training;
+use App\Models\Ingredient;
+use App\Models\Food;
+
 
 class RecodeController extends Controller
 {
@@ -13,9 +16,11 @@ class RecodeController extends Controller
      */
     public function input()
     {
+        $foods = Food::all();
+        $ingredients = Ingredient::all();
         $categories = Category::all();
         $trainings = Training::all();
-        return response()->view('recode.create', compact('categories', 'trainings'));
+        return response()->view('recode.create', compact('foods', 'categories', 'trainings', 'ingredients'));
     }
 
     /**
