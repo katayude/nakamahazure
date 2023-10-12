@@ -20,10 +20,9 @@
             <select name="op">
                 <option value="---">---</option>
                 <!-- 以下の部分はfoodテーブルからデータを持ってくる必要があります -->
-                <option value="Option A">Option A</option>
-                <option value="Option B">Option B</option>
-                <option value="Option C">Option C</option>
-                <option value="Option D">Option D</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                @endforeach
             </select>
             <br>
             <br>
@@ -32,10 +31,9 @@
             <select name="op">
                 <option value="---">---</option>
                 <!-- 以下の部分はtrainingテーブルからデータを持ってくる必要があります -->
-                <option value="Option A">Option A</option>
-                <option value="Option B">Option B</option>
-                <option value="Option C">Option C</option>
-                <option value="Option D">Option D</option>
+                @foreach ($trainings as $training)
+                    <option value="{{ $training->name }}">{{ $training->name }}</option>
+                @endforeach
             </select>
             <label>
                 <input type="number" name="training_minutes" value="">
@@ -99,10 +97,11 @@
         </form>
         <br>
 
-        <form method="post" action="">
+        <form method="post" action="{{ route('training.store') }}">
+            @csrf
             <p>トレーニングを登録 </p>
-            <input type="text" name="training_name" value="トレーニング名">
-            <input type="number" name="training_calorie" value="１分間の消費カロリー">
+            <input type="text" name="name" value="トレーニング名">
+            <input type="number" name="calorie" value="１分間の消費カロリー">
             <input type="submit" value="登録">
         </form>
     </div>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RecodeController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\CalendarController;
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/trainings', [TrainingController::class, 'store'])->name('training.store');
     Route::get('/calendar', [CalendarController::class, 'show'])->name('calendar');
-    Route::get('/input', [FollowController::class, 'input'])->name('calorie.input');
+    Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
 });
 
 require __DIR__ . '/auth.php';
-
