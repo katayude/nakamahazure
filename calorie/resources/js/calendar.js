@@ -15,10 +15,15 @@ let calendar = new Calendar(calendarEl, {
     dateClick: function (info) {
         // クリックした日付を取得
         var clickedDate = info.date;
-        var formattedDate = clickedDate.toISOString().slice(0, 10); // 日付をYYYY-MM-DD形式にフォーマット
+
+        // ローカルタイムゾーンでフォーマット
+        var year = clickedDate.getFullYear();
+        var month = String(clickedDate.getMonth() + 1).padStart(2, '0');
+        var day = String(clickedDate.getDate()).padStart(2, '0');
+        var formattedDate = year + '-' + month + '-' + day;
 
         // ページをリダイレクト
         window.location.href = '/dashboard/' + formattedDate;
-    },
+    }
 });
 calendar.render();
