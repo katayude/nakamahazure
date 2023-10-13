@@ -15,7 +15,7 @@
         <form method="post" action="{{ route('daily.store') }}">
             @csrf
             <p>食事を選択 </p>
-            <select name="op">
+            <select name="food_name">
                 <option value="---">---</option>
                 <!-- 以下の部分はfoodテーブルからデータを持ってくる必要があります -->
                 @foreach ($foods as $food)
@@ -24,9 +24,9 @@
             </select>
             <br>
             <br>
-
+            @csrf
             <p>トレーニングを選択 </p>
-            <select name="op">
+            <select name="training_name">
                 <option value="---">---</option>
                 <!-- 以下の部分はtrainingテーブルからデータを持ってくる必要があります -->
                 @foreach ($trainings as $training)

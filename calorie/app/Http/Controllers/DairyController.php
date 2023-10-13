@@ -8,7 +8,9 @@ use App\Models\Food;
 use App\Models\Training;
 use App\Models\Today;
 
-class DailyController extends Controller
+use Illuminate\Support\Facades\Auth;
+
+class DairyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +33,12 @@ class DailyController extends Controller
      */
     public function store(Request $request)
     {
+        ddd($request);
+
         $foodName = $request->input('food_name');
         $trainingName = $request->input('training_name');
         $date = date('Y-m-d'); // 現在の日付を取得（例: "2023-10-13"）
-        $userId = auth()->id();
+        $userId = Auth::id();
 
         $food = Food::where('name', $foodName)->first();
         if ($food) {

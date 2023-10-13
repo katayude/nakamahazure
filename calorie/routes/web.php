@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/trainings', [TrainingController::class, 'store'])->name('training.store');
     Route::get('/calendar', [CalendarController::class, 'show'])->name('calendar');
     Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
-    Route::post('/daily', [DailyController::class, 'store'])->name('daily.store');
+    Route::post('/daily', [DairyController::class, 'store'])->name('daily.store');
 });
 
 require __DIR__ . '/auth.php';
