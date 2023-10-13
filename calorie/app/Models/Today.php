@@ -9,5 +9,7 @@ class Today extends Model
 {
     use HasFactory;
 
+    protected $table = 'todays';
+
     protected $fillable = ['user_id', 'food_id', 'date', 'calorie'];
 }

@@ -33,7 +33,7 @@ class DairyController extends Controller
      */
     public function store(Request $request)
     {
-        ddd($request);
+
 
         $foodName = $request->input('food_name');
         $trainingName = $request->input('training_name');
