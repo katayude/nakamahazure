@@ -28,6 +28,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard/{date}', function () {
+    $date = request('date'); // クエリパラメータから日付を取得
+    return view('dashboard', ['date' => $date]);
+})->name('dashboardWithDate');
+
 Route::get('/calendar', function () {
     return view('calendar');
 });
