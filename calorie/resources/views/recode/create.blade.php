@@ -12,13 +12,14 @@
 <body>
     <div class="container">
         <h1> 今日の記録 </h1>
-        <form method="post" action="">
+        <form method="post" action="{{ route('daily.store') }}">
+            @csrf
             <p>食事を選択 </p>
             <select name="op">
                 <option value="---">---</option>
                 <!-- 以下の部分はfoodテーブルからデータを持ってくる必要があります -->
                 @foreach ($foods as $food)
-                    <option value="{{ $food->name }}">{{ $food->name }}</option>
+                    <option name = "food_name" value="{{ $food->name }}">{{ $food->name }}</option>
                 @endforeach
             </select>
             <br>
@@ -29,7 +30,7 @@
                 <option value="---">---</option>
                 <!-- 以下の部分はtrainingテーブルからデータを持ってくる必要があります -->
                 @foreach ($trainings as $training)
-                    <option value="{{ $training->name }}">{{ $training->name }}</option>
+                    <option name = "training_name" value="{{ $training->name }}">{{ $training->name }}</option>
                 @endforeach
             </select>
             <label>
@@ -42,6 +43,7 @@
         <br>
 
         <form method="post" action="">
+            @csrf
             <p>食事を登録 </p>
             <input type="text" name="food_name" value="料理名">
             <select name="food_ingredients1">
