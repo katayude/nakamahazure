@@ -24,7 +24,8 @@
                     var formattedDate = clickedDate.toISOString().slice(0, 10); // 日付をYYYY-MM-DD形式にフォーマット
 
                     // ページをリダイレクト
-                    window.location.href = 'http://localhost/dashboard/' + formattedDate;
+                    window.location.href = '/dashboard/' //+ formattedDate;
+                    ;
                 },
             });
             calendar.render();

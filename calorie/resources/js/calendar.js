@@ -18,7 +18,7 @@ let calendar = new Calendar(calendarEl, {
         var formattedDate = clickedDate.toISOString().slice(0, 10); // 日付をYYYY-MM-DD形式にフォーマット
 
         // ページをリダイレクト
-        window.location.href = '/your-redirect-url/' + formattedDate;
+        window.location.href = '/dashboard/';
     },
 });
 calendar.render();
