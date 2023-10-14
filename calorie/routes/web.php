@@ -6,6 +6,7 @@ use App\Http\Controllers\RecodeController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DairyController;
+use App\Http\Controllers\NutritionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
     Route::post('/daily', [DairyController::class, 'store'])->name('daily.store');
     Route::get('/edit', [RecodeController::class, 'edit'])->name('recode.edit');
-    
+    Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
 });
 
 require __DIR__ . '/auth.php';
