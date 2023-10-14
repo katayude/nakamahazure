@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecodeController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\DairyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/trainings', [TrainingController::class, 'store'])->name('training.store');
     Route::get('/calendar', [CalendarController::class, 'show'])->name('calendar');
     Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
+    Route::post('/daily', [DairyController::class, 'store'])->name('daily.store');
 });
 
 require __DIR__ . '/auth.php';
