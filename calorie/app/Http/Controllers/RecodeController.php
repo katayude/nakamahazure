@@ -52,7 +52,7 @@ class RecodeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return response()->view('recode.edit');
     }
 
     /**
