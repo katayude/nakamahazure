@@ -17,7 +17,7 @@ class IngredientSeeder extends Seeder
             'protein' => '6.7',
             'carbohydrate' => '77.5',
             'fat' => '0.6',
-            'salt' => '0.0',
+            'solt' => '0.0',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -28,7 +28,7 @@ class IngredientSeeder extends Seeder
             'protein' => '12.6',
             'carbohydrate' => '74.7',
             'fat' => '1.3',
-            'salt' => '0.0',
+            'solt' => '0.0',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -39,7 +39,7 @@ class IngredientSeeder extends Seeder
             'protein' => '12.3',
             'carbohydrate' => '0.3',
             'fat' => '10.3',
-            'salt' => '0.4',
+            'solt' => '0.4',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -50,7 +50,7 @@ class IngredientSeeder extends Seeder
             'protein' => '26.0',
             'carbohydrate' => '0.0',
             'fat' => '17.4',
-            'salt' => '0.1',
+            'solt' => '0.1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -61,7 +61,7 @@ class IngredientSeeder extends Seeder
             'protein' => '0.2',
             'carbohydrate' => '9.3',
             'fat' => '0.2',
-            'salt' => '0.0',
+            'solt' => '0.0',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -72,7 +72,7 @@ class IngredientSeeder extends Seeder
             'protein' => '1.9',
             'carbohydrate' => '8.6',
             'fat' => '0.0',
-            'salt' => '16.3',
+            'solt' => '16.3',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
