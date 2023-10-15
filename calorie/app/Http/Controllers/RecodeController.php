@@ -79,8 +79,6 @@ class RecodeController extends Controller
         $selectedData = $request->input('selected_data');
         $selectedDate = $request->input('selected_date');
 
-        dd($selectedData, $selectedDate);
-
         if ($selectedData === 'food') {
             $data = Food::all(); // フードテーブルからデータ取得
         } elseif ($selectedData === 'todays' || $selectedData === 'dairies') {
@@ -90,7 +88,9 @@ class RecodeController extends Controller
         } else {
             $data = [];
         }
+        session(['selected_data' => $selectedData]);
 
-        return view('data.show', compact('data'));
+        return view('edit', compact('selectedData', 'selectedDate', 'data'));
     }
+
 }
