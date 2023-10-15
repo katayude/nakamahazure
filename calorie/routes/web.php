@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
     Route::post('/daily', [DairyController::class, 'store'])->name('daily.store');
     Route::get('/edit', [RecodeController::class, 'edit'])->name('recode.edit');
+    Route::get('/show-data', [RecodeController::class, 'showData'])->name('show.data');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
 });
 

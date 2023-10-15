@@ -7,6 +7,10 @@ use App\Models\Category;
 use App\Models\Training;
 use App\Models\Ingredient;
 use App\Models\Food;
+use App\Models\Dairy;
+use App\Models\Today;
+use App\Models\User;
+use Auth;
 
 
 class RecodeController extends Controller
@@ -50,9 +54,9 @@ class RecodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        return response()->view('recode.edit');
+        return response()->view('edit');
     }
 
     /**
@@ -69,5 +73,24 @@ class RecodeController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showData(Request $request) {
+        $selectedData = $request->input('selected_data');
+        $selectedDate = $request->input('selected_date');
+
+        dd($selectedData, $selectedDate);
+
+        if ($selectedData === 'food') {
+            $data = Food::all(); // フードテーブルからデータ取得
+        } elseif ($selectedData === 'todays' || $selectedData === 'dairies') {
+            $data = ($selectedData === 'todays') 
+                ? Today::where('date', $selectedDate)->get()
+                : Dairy::where('date', $selectedDate)->get();
+        } else {
+            $data = [];
+        }
+
+        return view('data.show', compact('data'));
     }
 }
