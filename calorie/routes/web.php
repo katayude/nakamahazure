@@ -8,6 +8,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DairyController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\ChatGptController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,9 @@ Route::get('/dashboard/{date}', function () {
 Route::get('/calendar', function () {
     return view('calendar');
 });
+
+Route::get('/chat', [ChatGptController::class, 'index'])->name('chat_gpt-index');
+Route::post('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
 
 
 Route::middleware('auth')->group(function () {
