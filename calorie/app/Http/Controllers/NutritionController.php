@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
     use App\Models\Ingredient;
     use App\Models\Nutritions;
 
+
 class NutritionController extends Controller
 {
     public function show($date)

@@ -17,6 +17,7 @@
                         <canvas id="graph-area2" height="450" width="210"></canvas>
                         <canvas id="graph-area3" height="450" width="210"></canvas>
                         <canvas id="graph-area4" height="450" width="210"></canvas>
+
                     </div>
                     <script type="text/javascript">
                         // タンパク質
@@ -39,6 +40,7 @@
                                 }
                             ]
                         }
+                        
                         // 炭水化物
                         var barChartData2 = {
                             labels : ["炭水化物"],
@@ -68,6 +70,7 @@
                                     strokeColor : "rgba(240,128,128,0.9)",  // 枠線の色
                                     highlightFill: "rgba(255,64,64,0.75)",  // マウスが載った際の塗りつぶし色
                                     highlightStroke: "rgba(255,64,64,1)",   // マウスが載った際の枠線の色
+
                                     data : [{{ $totalNutrition->total_fat}}]     
                                 },
                                 {
@@ -79,6 +82,7 @@
                                 }
                             ]
                         }
+
                         // 塩分
                         var barChartData4 = {
                             labels : ["塩分"],
@@ -88,7 +92,9 @@
                                     strokeColor : "rgba(240,128,128,0.9)",  // 枠線の色
                                     highlightFill: "rgba(255,64,64,0.75)",  // マウスが載った際の塗りつぶし色
                                     highlightStroke: "rgba(255,64,64,1)",   // マウスが載った際の枠線の色
+
                                     data : [{{ $totalNutrition->total_solt}}]    
+
                                 },
                                 {
                                     fillColor : "rgba(151,187,205,0.6)",
@@ -99,6 +105,7 @@
                                 }
                             ]
                         }
+                        
 
                         window.onload = function () {
                                 var ctx1 = document.getElementById("graph-area1").getContext("2d");
@@ -112,6 +119,7 @@
                                     
                                 var ctx4 = document.getElementById("graph-area4").getContext("2d");
                                 window.myBar4 = new Chart(ctx4).Bar(barChartData4);
+
                         }
                     </script>
                     <!-- データ -->

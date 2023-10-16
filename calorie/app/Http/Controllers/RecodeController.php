@@ -7,6 +7,10 @@ use App\Models\Category;
 use App\Models\Training;
 use App\Models\Ingredient;
 use App\Models\Food;
+use App\Models\Dairy;
+use App\Models\Today;
+use App\Models\User;
+use Auth;
 
 
 class RecodeController extends Controller
@@ -50,9 +54,12 @@ class RecodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        $selectedDate = null;
+        $selectedData = null;
+        $data = null;
+        return response()->view('edit', compact('selectedData', 'selectedData', 'data'));
     }
 
     /**
@@ -70,4 +77,37 @@ class RecodeController extends Controller
     {
         //
     }
+
+    public function showData(Request $request) {
+        $user = auth()->user();
+        $selectedData = $request->input('selected_data');
+        $data = [];
+
+        if ($selectedData === 'food') {
+            $data = Food::all(); // フードテーブルからデータ取得
+        }
+
+        session(['selected_data' => $selectedData]);
+
+        return view('edit', compact('selectedData', 'data'));
+    }
+
+    public function showDate(Request $request) {
+        $user = auth()->user();
+        $selectedDate = $request->input('selected_date');
+        $selectedData = $request->input('selected_data');
+        $data = [];
+
+        if ($selectedData === 'todays') {
+            $data = Today::where('date', $selectedDate)->get(); // Todays テーブルからデータ取得
+        } elseif ($selectedData === 'dairies') {
+            $data = Dairy::where('date', $selectedDate)->get(); // Dairies テーブルからデータ取得
+        }
+
+        session(['selected_data' => $selectedData]);
+        session(['selected_date' => $selectedDate]);
+
+        return view('edit', compact('selectedData','selectedDate' , 'data'));
+    }
+
 }

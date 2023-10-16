@@ -10,6 +10,7 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->insert([
             'name' => '米',
             'category_id' => '1',
+
             'calorie' => '360',
             'protein' => '6.7',
             'carbohydrate' => '77.5',
