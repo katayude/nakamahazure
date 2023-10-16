@@ -10,44 +10,43 @@ namespace App\Http\Controllers;
     use App\Models\Ingredient;
     use App\Models\Nutritions;
 
-    class NutritionController extends Controller
+
+class NutritionController extends Controller
+{
+    public function show($date)
     {
-        public function show($date)
-        {
-            // ログインしているユーザの情報を取得
-            $user = auth()->user();
+        // ログインしているユーザを取得
+        $user = auth()->user();
 
-            // 選択された日付に関連する食事を取得
-            $meals = Today::where('date', $date)
-                ->join('food', 'food.id', '=', 'todays.food_id')
-                ->where('todays.user_id', $user->id)
-                ->get();
+        // 指定された日付に食べた料理を取得
+        $todayMeals = Today::where('date', $date)
+            ->where('user_id', $user->id)
+            ->get();
 
-            // 各食事の栄養素を取得し、合計値を計算
-            $totalNutrition = [
-                'protein' => 0,
-                'fat' => 0,
-                'carbohydrate' => 0,
-                'vitamin' => 0,
-                'minerals' => 0,
-            ];
+        $totalNutrition = [
+            'total_protein' => 0,
+            'total_fat' => 0,
+            'total_carbohydrate' => 0,
+            'total_solt' => 0,
+        ];
 
-            foreach ($meals as $meal) {
-                $food = Food::find($meal->food_id);
-                $ingredients = Ingredient::find($food->ingredient1_id);
-                $nutritions = Nutritions::find($ingredients->id);
+        foreach ($todayMeals as $todayMeal) {
+            $food = Food::find($todayMeal->food_id);
+            $ingredientIds = [$food->ingredient1_id, $food->ingredient2_id, $food->ingredient3_id, $food->ingredient4_id, $food->ingredient5_id];
+            $mealNutrition = Ingredient::whereIn('id', $ingredientIds)
+                ->selectRaw('SUM(protein) as total_protein, SUM(fat) as total_fat, SUM(carbohydrate) as total_carbohydrate, SUM(solt) as total_solt')
+                ->first();
 
-                $totalNutrition['protein'] += $nutritions->protein;
-                $totalNutrition['fat'] += $nutritions->fat;
-                $totalNutrition['carbohydrate'] += $nutritions->carbohydrate;
-                $totalNutrition['vitamin'] += $nutritions->vitamin;
-                $totalNutrition['minerals'] += $nutritions->minerals;
-            }
-
-            return view('dashboard', [
-                'date' => $date,
-                'totalNutrition' => $totalNutrition,
-            ]);
+        // 各栄養素を合算
+        $totalNutrition['total_protein'] += $mealNutrition->total_protein;
+        $totalNutrition['total_fat'] += $mealNutrition->total_fat;
+        $totalNutrition['total_carbohydrate'] += $mealNutrition->total_carbohydrate;
+        $totalNutrition['total_solt'] += $mealNutrition->total_solt;
         }
+
+        return view('dashboard', [
+            'date' => $date,
+            'totalNutrition' => (object) $totalNutrition,
+        ]);
     }
-?>
+}

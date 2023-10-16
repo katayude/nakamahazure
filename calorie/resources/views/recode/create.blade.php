@@ -42,55 +42,55 @@
         </form>
         <br>
 
-        <form method="post" action="">
+        <form method="post" action="{{ route('food.store') }}">
             @csrf
             <p>食事を登録 </p>
-            <input type="text" name="food_name" value="料理名">
-            <select name="food_ingredients1">
-                <option value="---">---</option>
+            <input type="text" name="name" value="料理名">
+            <select name="ingredient1_id">
+                <option value="">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
+                    echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
-            <input type="number" name="ingredients1_g" value="">
-            <select name="food_ingredients2">
-                <option value="---">---</option>
+            <input type="number" name="ingredient1_weight" value="">
+            <select name="ingredient2_id">
+                <option value= "">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
+                    echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
-            <input type="number" name="ingredients2_g" value="">
-            <select name="food_ingredients3">
-                <option value="---">---</option>
+            <input type="number" name="ingredient2_weight" value="">
+            <select name="ingredient3_id">
+                <option value="">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
+                    echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
-            <input type="number" name="ingredients3_g" value="">
-            <select name="food_ingredients4">
-                <option value="---">---</option>
+            <input type="number" name="ingredient3_weight" value="">
+            <select name="ingredient4_id">
+                <option value="">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
+                    echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
-            <input type="number" name="ingredients4_g" value="">
-            <select name="food_ingredients5">
-                <option value="---">---</option>
+            <input type="number" name="ingredient4_weight" value="">
+            <select name="ingredient5_id">
+                <option value="">---</option>
                 <?php
                 foreach ($ingredients as $ingredient) {
-                    echo '<option value="' . $ingredient->name . '">' . $ingredient->name . '</option>';
+                    echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
                 }
                 ?>
             </select>
-            <input type="number" name="ingredients5_g" value="">
+            <input type="number" name="ingredient5_weight" value="">
 
             <input type="submit" value="登録">
         </form>

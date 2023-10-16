@@ -7,6 +7,9 @@ use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DairyController;
 use App\Http\Controllers\NutritionController;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\ChatGptController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +42,9 @@ Route::get('/calendar', function () {
     return view('calendar');
 });
 
+Route::get('/chat', [ChatGptController::class, 'index'])->name('chat_gpt-index');
+Route::post('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -52,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/data', [RecodeController::class, 'showData'])->name('data.show');
     Route::get('/edit/date', [RecodeController::class, 'showDate'])->name('date.show');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
+    Route::post('/food', [FoodController::class, 'store'])->name('food.store');
 });
 
 require __DIR__ . '/auth.php';
