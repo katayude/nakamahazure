@@ -17,7 +17,7 @@
             <div class="flex flex-col mb-4">
                 <label for="selected_data"><font color="white">データを選択:</font></label>
                 <div class="flex">
-                    <select name="selected_data" id="selected_data" style="width: 110px">
+                    <select name="selected_data" id="selected_data" style="width: 120px">
                         <option value=""></option>
                         <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
                         <option value="todays" {{ session('selected_data') === 'todays' ? 'selected' : '' }}>Todays</option>
@@ -36,6 +36,13 @@
                     @foreach ($data as $food)
                         <tr>
                             <td style="color: white;">{{ $food->name }}</td>
+                            <td>
+                                <form action="{{ route('food.delete', $food->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="color: red;">削除</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
 
@@ -57,11 +64,18 @@
                         </td>
                     </tr>
 
-                @foreach ($data as $today)
-                    <tr>
-                        <td style="color: white;">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</td>
-                    </tr>
-                @endforeach
+                    @foreach ($data as $today)
+                        <tr>
+                            <td style="color: white;">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</td>
+                            <td>
+                                <form action="{{ route('today.delete', $today->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="color: red;">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
 
 
                 @elseif ($selectedData === 'dairies')
@@ -80,11 +94,18 @@
                             </form>
                         </td>
                     </tr>
-                @foreach ($data as $dairy)
-                    <tr>
-                        <td style="color: white;">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</td>
-                    </tr>
-                @endforeach
+                    @foreach ($data as $dairy)
+                        <tr>
+                            <td style="color: white;">{{ App\Models\Dairy::where('id', $dairy->training_id)->value('name') }}</td>
+                            <td>
+                                <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="color: red;">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 @else
                           <!-- 何も選択されていない場合の表示 -->

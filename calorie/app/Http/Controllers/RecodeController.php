@@ -119,4 +119,33 @@ class RecodeController extends Controller
         return view('information', compact('selectedData'));
     }
 
+    public function deleteFood(Request $request, $id) {
+        // データを削除する処理
+        Food::destroy($id);
+        $selectedData = 'food';
+        $data = Food::all();
+        return view('edit', compact('selectedData', 'data'));
+    }
+
+    public function deleteToday(Request $request, $id) {
+        // データを削除する処理
+        $date = $request->input('selected_date');
+        Today::destroy($id);
+        $selectedData = 'todays';
+        $selectedDate = $date;
+        $data = Today::where('date', $selectedDate)->get();
+        return view('edit', compact('selectedData','selectedDate', 'date', 'data'));
+    }
+
+        public function deleteDairy(Request $request, $id) {
+        // データを削除する処理
+        $date = $request->input('selected_date');
+        Daity::destroy($id);
+        $selectedData = 'dairies';
+        $selectedDate = $date;
+        $data = Dairy::where('date', $selectedDate)->get();
+        return view('edit', compact('selectedData','selectedDate', 'date', 'data'));
+    }
+
+
 }
