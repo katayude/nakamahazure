@@ -110,4 +110,13 @@ class RecodeController extends Controller
         return view('edit', compact('selectedData','selectedDate' , 'data'));
     }
 
+    public function infor(Request $request)
+    {
+        $user = auth()->user();
+        $selectedData = null;
+        $selectedData = $request->input('selected_data');
+        session(['selected_data' => $selectedData]);
+        return view('information', compact('selectedData'));
+    }
+
 }

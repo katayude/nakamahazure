@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/date', [RecodeController::class, 'showDate'])->name('date.show');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
     Route::post('/food', [FoodController::class, 'store'])->name('food.store');
+    Route::get('/information', [RecodeController::class, 'infor'])->name('information');
 });
 
 require __DIR__ . '/auth.php';
