@@ -56,7 +56,10 @@ class RecodeController extends Controller
      */
     public function edit()
     {
-        return response()->view('edit');
+        $selectedDate = null;
+        $selectedData = null;
+        $data = null;
+        return response()->view('edit', compact('selectedData', 'selectedData', 'data'));
     }
 
     /**
@@ -76,21 +79,35 @@ class RecodeController extends Controller
     }
 
     public function showData(Request $request) {
+        $user = auth()->user();
         $selectedData = $request->input('selected_data');
-        $selectedDate = $request->input('selected_date');
+        $data = [];
 
         if ($selectedData === 'food') {
             $data = Food::all(); // フードテーブルからデータ取得
-        } elseif ($selectedData === 'todays' || $selectedData === 'dairies') {
-            $data = ($selectedData === 'todays') 
-                ? Today::where('date', $selectedDate)->get()
-                : Dairy::where('date', $selectedDate)->get();
-        } else {
-            $data = [];
         }
+
         session(['selected_data' => $selectedData]);
 
-        return view('edit', compact('selectedData', 'selectedDate', 'data'));
+        return view('edit', compact('selectedData', 'data'));
+    }
+
+    public function showDate(Request $request) {
+        $user = auth()->user();
+        $selectedDate = $request->input('selected_date');
+        $selectedData = $request->input('selected_data');
+        $data = [];
+
+        if ($selectedData === 'todays') {
+            $data = Today::where('date', $selectedDate)->get(); // Todays テーブルからデータ取得
+        } elseif ($selectedData === 'dairies') {
+            $data = Dairy::where('date', $selectedDate)->get(); // Dairies テーブルからデータ取得
+        }
+
+        session(['selected_data' => $selectedData]);
+        session(['selected_date' => $selectedDate]);
+
+        return view('edit', compact('selectedData','selectedDate' , 'data'));
     }
 
 }

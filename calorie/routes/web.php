@@ -48,7 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/calendar', [CalendarController::class, 'show'])->name('calendar');
     Route::get('/input', [RecodeController::class, 'input'])->name('calorie.input');
     Route::post('/daily', [DairyController::class, 'store'])->name('daily.store');
-    Route::get('/edit', [RecodeController::class, 'showData'])->name('recode.edit');
+    Route::get('/edit', [RecodeController::class, 'edit'])->name('recode.edit');
+    Route::get('/edit/data', [RecodeController::class, 'showData'])->name('data.show');
+    Route::get('/edit/date', [RecodeController::class, 'showDate'])->name('date.show');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
 });
 
