@@ -39,6 +39,12 @@
                         {{ __('編集') }}
                     </x-nav-link>
                 </div>
+                <!-- 🔽 情報ページへのリンクを追加 -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('information')" :active="request()->routeIs('information')">
+                        {{ __('情報') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -123,6 +129,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('recode.edit')" :active="request()->routeIs('recode.edit')">
                 {{ __('編集') }}
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('information')" :active="request()->routeIs('information')">
+                {{ __('情報') }}
             </x-responsive-nav-link>
         </div>
 

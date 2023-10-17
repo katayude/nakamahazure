@@ -22,7 +22,6 @@
             .button-container:hover{
                 background-color: gray;
             }
-
         </style>
     </head>
     <body>
