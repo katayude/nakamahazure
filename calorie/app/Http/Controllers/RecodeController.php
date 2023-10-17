@@ -84,7 +84,7 @@ class RecodeController extends Controller
         $data = [];
 
         if ($selectedData === 'food') {
-            $data = Food::all(); // フードテーブルからデータ取得
+            $data = Food::where('user_id', $user->id)->get();
         }
 
         session(['selected_data' => $selectedData]);
@@ -99,9 +99,9 @@ class RecodeController extends Controller
         $data = [];
 
         if ($selectedData === 'todays') {
-            $data = Today::where('date', $selectedDate)->get(); // Todays テーブルからデータ取得
+            $data = Today::where('date', $selectedDate)->where('user_id', $user->id)->get(); // Todays テーブルからデータ取得
         } elseif ($selectedData === 'dairies') {
-            $data = Dairy::where('date', $selectedDate)->get(); // Dairies テーブルからデータ取得
+            $data = Dairy::where('date', $selectedDate)->where('user_id', $user->id)->get(); // Dairies テーブルからデータ取得
         }
 
         session(['selected_data' => $selectedData]);

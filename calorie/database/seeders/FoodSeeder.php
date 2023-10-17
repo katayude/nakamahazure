@@ -15,6 +15,7 @@ class FoodSeeder extends Seeder
     {
         DB::table('food')->insert([
             'name' => '卵かけご飯',
+            'user_id' => '1',
             'ingredient1_id' => '1',  // 米
             'ingredient1_weight' => '200', // 200gとして
             'ingredient2_id' => '3',  // 卵
@@ -33,6 +34,7 @@ class FoodSeeder extends Seeder
         // 親子丼
         DB::table('food')->insert([
             'name' => '親子丼',
+            'user_id' => '1',
             'ingredient1_id' => '1',       // 米
             'ingredient1_weight' => '150', // 150g
             'ingredient2_id' => '3',      // 卵
@@ -51,6 +53,7 @@ class FoodSeeder extends Seeder
         // ツナサラダ
         DB::table('food')->insert([
             'name' => 'ツナサラダ',
+            'user_id' => '1',
             'ingredient1_id' => '10',       // トマト
             'ingredient1_weight' => '100',  // 100g
             'ingredient2_id' => '9',       // ツナ
@@ -69,6 +72,7 @@ class FoodSeeder extends Seeder
         // 冷奴
         DB::table('food')->insert([
             'name' => '冷奴',
+            'user_id' => '2',
             'ingredient1_id' => '16',      // 豆腐
             'ingredient1_weight' => '100', // 100g
             'ingredient2_id' => '7',      // 醤油
