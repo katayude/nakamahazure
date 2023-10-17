@@ -15,14 +15,8 @@ use App\Models\User_information;
 class ChatGptController extends Controller
 
 {
+
     public function index(Request $request)
-    {
-        $chat = "ChatGPTの回答";
-
-        return view('chat', compact('chat'));
-    }
-
-    public function chat(Request $request)
     {
         // ログインしているユーザを取得
         $user = auth()->user();
@@ -35,6 +29,10 @@ class ChatGptController extends Controller
         $todayMeals = Today::where('date', $date)
             ->where('user_id', $user->id)
             ->get();
+
+        $foodIds = $todayMeals->pluck('food_id')->toArray();
+        $todayFood = Food::whereIn('id', $foodIds)->get();
+
 
         $totalNutrition = [
             'total_protein' => 0,
@@ -58,6 +56,63 @@ class ChatGptController extends Controller
             $totalNutrition['total_solt'] += $mealNutrition->total_solt;
             $totalNutrition['total_calorie'] += $food->calorie;
         }
+        $protein = $totalNutrition['total_protein'];
+        $fat = $totalNutrition['total_fat'];
+        $carbohydrate = $totalNutrition['total_carbohydrate'];
+        $calorie = $totalNutrition['total_calorie'];
+
+        $chat = "今日は何を食べたかな？";
+
+
+        return view('chat', compact('chat', 'protein', 'fat', 'carbohydrate', 'calorie', 'todayFood'));
+    }
+
+    public function chat(Request $request)
+    {
+        // ログインしているユーザを取得
+        $user = auth()->user();
+        $user_information = User_information::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $date = date('Y-m-d');
+
+        // 指定された日付に食べた料理を取得
+        $todayMeals = Today::where('date', $date)
+            ->where('user_id', $user->id)
+            ->get();
+
+        $foodIds = $todayMeals->pluck('food_id')->toArray();
+        $todayFood = Food::whereIn('id', $foodIds)->get();
+
+
+        $totalNutrition = [
+            'total_protein' => 0,
+            'total_fat' => 0,
+            'total_carbohydrate' => 0,
+            'total_solt' => 0,
+            'total_calorie' => 0
+        ];
+
+        foreach ($todayMeals as $todayMeal) {
+            $food = Food::find($todayMeal->food_id);
+            $ingredientIds = [$food->ingredient1_id, $food->ingredient2_id, $food->ingredient3_id, $food->ingredient4_id, $food->ingredient5_id];
+            $mealNutrition = Ingredient::whereIn('id', $ingredientIds)
+                ->selectRaw('SUM(protein) as total_protein, SUM(fat) as total_fat, SUM(carbohydrate) as total_carbohydrate, SUM(solt) as total_solt')
+                ->first();
+
+            // 各栄養素を合算
+            $totalNutrition['total_protein'] += $mealNutrition->total_protein;
+            $totalNutrition['total_fat'] += $mealNutrition->total_fat;
+            $totalNutrition['total_carbohydrate'] += $mealNutrition->total_carbohydrate;
+            $totalNutrition['total_solt'] += $mealNutrition->total_solt;
+            $totalNutrition['total_calorie'] += $food->calorie;
+        }
+        $protein = $totalNutrition['total_protein'];
+        $fat = $totalNutrition['total_fat'];
+        $carbohydrate = $totalNutrition['total_carbohydrate'];
+        $calorie = $totalNutrition['total_calorie'];
+
+
         $system = "以下は、推奨される摂取カロリーや栄養素の情報です。
 年齢層: 18~29歳
 男性:
@@ -149,6 +204,6 @@ class ChatGptController extends Controller
 
         $chat = $response->json('choices')[0]['message']['content'];
 
-        return view('chat', compact('chat'));
+        return view('chat', compact('chat', 'protein', 'fat', 'carbohydrate', 'calorie', 'todayFood'));
     }
 }
