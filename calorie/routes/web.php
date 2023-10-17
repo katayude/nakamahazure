@@ -9,6 +9,7 @@ use App\Http\Controllers\DairyController;
 use App\Http\Controllers\NutritionController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ChatGptController;
+use App\Http\Controllers\User_informationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/date', [RecodeController::class, 'showDate'])->name('date.show');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
     Route::post('/food', [FoodController::class, 'store'])->name('food.store');
+    Route::post('/chat/information', [User_informationController::class, 'store'])->name('user_information.store');
 });
 
 require __DIR__ . '/auth.php';

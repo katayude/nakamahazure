@@ -26,7 +26,9 @@ class ChatGptController extends Controller
     {
         // ログインしているユーザを取得
         $user = auth()->user();
-        $user_information = User_information::where('user_id', $user->id);
+        $user_information = User_information::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
         $date = date('Y-m-d');
 
         // 指定された日付に食べた料理を取得
@@ -96,11 +98,15 @@ class ChatGptController extends Controller
 - 脂質: 43~65g
 - 炭水化物: 244~488g
 
-この情報を基に、私の摂取エネルギーや栄養素のバランスを評価し、必要に応じてアドバイスをしてください。簡潔に300字いないで。小学生にもわかりやすく、励ましややる気促進の言葉を多くしてください。";
+この情報を基に、私の摂取エネルギーや栄養素のバランスを評価し、必要に応じてアドバイスをしてください。
+簡潔に200字以内で。小学生にもわかりやすく、励ましややる気促進の言葉を多くしてください。
+#制約条件
+#入力文に対して、幼児に話しかけるような口調で返答をしてください。
+#入力文に対して、幼児でも分かるような簡単な言葉で返答をしてください。";
 
         $text = "
-年齢: 28歳
-性別: 男性
+年齢: {$user_information->age}歳
+性別: {$user_information->gender}
 摂取エネルギー: {$totalNutrition['total_calorie']}kcal
 タンパク質摂取量: {$totalNutrition['total_protein']}g
 脂質摂取量: {$totalNutrition['total_fat']}g
