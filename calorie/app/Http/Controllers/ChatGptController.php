@@ -10,6 +10,7 @@ use App\Models\Food;
 use App\Models\Today;
 use App\Models\Ingredient;
 use App\Models\Nutritions;
+use App\Models\User_information;
 
 class ChatGptController extends Controller
 
@@ -25,6 +26,7 @@ class ChatGptController extends Controller
     {
         // ログインしているユーザを取得
         $user = auth()->user();
+        $user_information = User_information::where('user_id', $user->id);
         $date = date('Y-m-d');
 
         // 指定された日付に食べた料理を取得
@@ -96,7 +98,7 @@ class ChatGptController extends Controller
 
 この情報を基に、私の摂取エネルギーや栄養素のバランスを評価し、必要に応じてアドバイスをしてください。簡潔に300字いないで。小学生にもわかりやすく、励ましややる気促進の言葉を多くしてください。";
 
-        $user = "
+        $text = "
 年齢: 28歳
 性別: 男性
 摂取エネルギー: {$totalNutrition['total_calorie']}kcal
@@ -127,7 +129,7 @@ class ChatGptController extends Controller
                 ],
                 [
                     "role" => "user",
-                    "content" => $user
+                    "content" => $text
                 ]
             ]
         );
