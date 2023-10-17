@@ -57,8 +57,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit', [RecodeController::class, 'edit'])->name('recode.edit');
     Route::get('/edit/data', [RecodeController::class, 'showData'])->name('data.show');
     Route::get('/edit/date', [RecodeController::class, 'showDate'])->name('date.show');
+    Route::Delete('/edit/deleteFood/{id}', [RecodeController::class, 'deleteFood'])->name('food.delete');
+    Route::Delete('/edit/deleteToday/{id}', [RecodeController::class, 'deleteToday'])->name('today.delete');
+    Route::Delete('/edit/deleteDairy/{id}', [RecodeController::class, 'deleteDairy'])->name('dairy.delete');
     Route::get('/dashboard/{date}', [NutritionController::class, 'show'])->name('dashboardWithDate');
     Route::post('/food', [FoodController::class, 'store'])->name('food.store');
+    Route::get('/information', [RecodeController::class, 'infor'])->name('information');
 });
 
 require __DIR__ . '/auth.php';

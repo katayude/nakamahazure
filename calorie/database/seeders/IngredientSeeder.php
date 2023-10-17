@@ -65,7 +65,7 @@ class IngredientSeeder extends Seeder
         ]);
         DB::table('ingredients')->insert([
             'name' => '醤油',
-            'category_id' => '1',
+            'category_id' => '6',
             'calorie' => '53',
             'protein' => '1.9',
             'carbohydrate' => '8.6',
