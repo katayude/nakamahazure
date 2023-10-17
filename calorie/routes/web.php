@@ -44,8 +44,8 @@ Route::get('/calendar', function () {
     return view('calendar');
 });
 
-Route::post('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-index');
-Route::get('/dashboard', [ChatGptController::class, 'index'])->name('chat_gpt-chat');
+Route::get('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
+Route::get('/dashboard', [ChatGptController::class, 'index'])->name('chat_gpt-index');
 
 
 Route::middleware('auth')->group(function () {

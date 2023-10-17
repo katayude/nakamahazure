@@ -61,7 +61,7 @@ class DairyController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('chat_gpt-index');
     }
 
     /**

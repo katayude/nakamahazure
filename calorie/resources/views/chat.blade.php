@@ -91,12 +91,16 @@
 
                     <div class="container">
                         <div class="character">
-                            <img src="{{ asset('images/character.png') }}" alt="キャラクター">
+                            <a href="{{ route('chat_gpt-chat') }}">
+                                <img src="{{ asset('images/character.png') }}" alt="キャラクター">
+                            </a>
                         </div>
                         <div class="speech-bubble">
                             {{ $chat }}
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

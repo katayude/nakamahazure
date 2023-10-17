@@ -87,13 +87,13 @@ ol li {
 
 .speech-bubble {
     color: rgb(17, 24, 39);
-    position: relative;
     margin-left: 20px;
     padding: 10px;
     background-color: #e0e0e0;
     border: 2px solid #000;
     border-radius: 10px;
-    max-width: 300px;
+    max-width: 700px;
+    max-height: 200px;
 }
 
 .speech-bubble:before {
