@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
+use App\Models\User;
+use App\Models\Food;
+use App\Models\Today;
+use App\Models\Ingredient;
+use App\Models\Nutritions;
 
 class ChatGptController extends Controller
 
@@ -19,7 +23,37 @@ class ChatGptController extends Controller
 
     public function chat(Request $request)
     {
-        $client = new Client(['timeout' => 60.0]);
+        // ログインしているユーザを取得
+        $user = auth()->user();
+        $date = date('Y-m-d');
+
+        // 指定された日付に食べた料理を取得
+        $todayMeals = Today::where('date', $date)
+            ->where('user_id', $user->id)
+            ->get();
+
+        $totalNutrition = [
+            'total_protein' => 0,
+            'total_fat' => 0,
+            'total_carbohydrate' => 0,
+            'total_solt' => 0,
+            'total_calorie' => 0
+        ];
+
+        foreach ($todayMeals as $todayMeal) {
+            $food = Food::find($todayMeal->food_id);
+            $ingredientIds = [$food->ingredient1_id, $food->ingredient2_id, $food->ingredient3_id, $food->ingredient4_id, $food->ingredient5_id];
+            $mealNutrition = Ingredient::whereIn('id', $ingredientIds)
+                ->selectRaw('SUM(protein) as total_protein, SUM(fat) as total_fat, SUM(carbohydrate) as total_carbohydrate, SUM(solt) as total_solt')
+                ->first();
+
+            // 各栄養素を合算
+            $totalNutrition['total_protein'] += $mealNutrition->total_protein;
+            $totalNutrition['total_fat'] += $mealNutrition->total_fat;
+            $totalNutrition['total_carbohydrate'] += $mealNutrition->total_carbohydrate;
+            $totalNutrition['total_solt'] += $mealNutrition->total_solt;
+            $totalNutrition['total_calorie'] += $food->calorie;
+        }
         $system = "以下は、推奨される摂取カロリーや栄養素の情報です。
 年齢層: 18~29歳
 男性:
@@ -61,7 +95,16 @@ class ChatGptController extends Controller
 - 炭水化物: 244~488g
 
 この情報を基に、私の摂取エネルギーや栄養素のバランスを評価し、必要に応じてアドバイスをしてください。簡潔に300字いないで。小学生にもわかりやすく、励ましややる気促進の言葉を多くしてください。";
-        $user = $request->sentence;
+
+        $user = "
+年齢: 28歳
+性別: 男性
+摂取エネルギー: {$totalNutrition['total_calorie']}kcal
+タンパク質摂取量: {$totalNutrition['total_protein']}g
+脂質摂取量: {$totalNutrition['total_fat']}g
+炭水化物摂取量: {$totalNutrition['total_carbohydrate']}g
+食塩摂取量: {$totalNutrition['total_solt']}g";
+
         // ChatGPT APIのエンドポイントURL
         $url = "https://api.openai.com/v1/chat/completions";
 
