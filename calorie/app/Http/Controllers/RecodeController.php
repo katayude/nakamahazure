@@ -85,9 +85,12 @@ class RecodeController extends Controller
 
         if ($selectedData === 'food') {
             $data = Food::where('user_id', $user->id)->get();
+        } elseif ($selectedData === 'training') {
+            $data = Training::where('user_id', $user->id)->get();
         }
 
         session(['selected_data' => $selectedData]);
+
 
         return view('edit', compact('selectedData', 'data'));
     }
@@ -127,6 +130,14 @@ class RecodeController extends Controller
         return view('edit', compact('selectedData', 'data'));
     }
 
+    public function deleteTraining(Request $request, $id) {
+        // データを削除する処理
+        Training::destroy($id);
+        $selectedData = 'food';
+        $data = Training::all();
+        return view('edit', compact('selectedData', 'data'));
+    }
+
     public function deleteToday(Request $request, $id) {
         // データを削除する処理
         $date = $request->input('selected_date');
@@ -137,10 +148,10 @@ class RecodeController extends Controller
         return view('edit', compact('selectedData','selectedDate', 'date', 'data'));
     }
 
-        public function deleteDairy(Request $request, $id) {
+    public function deleteDairy(Request $request, $id) {
         // データを削除する処理
         $date = $request->input('selected_date');
-        Daity::destroy($id);
+        Dairy::destroy($id);
         $selectedData = 'dairies';
         $selectedDate = $date;
         $data = Dairy::where('date', $selectedDate)->get();
