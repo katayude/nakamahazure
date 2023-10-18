@@ -17,8 +17,9 @@
             <div class="flex flex-col mb-4">
                 <label for="selected_data"><font color="white">データを選択:</font></label>
                 <div class="flex">
-                    <select name="selected_data" id="selected_data" style="width: 120px">
+                    <select name="selected_data" id="selected_data" style="width: 130px">
                         <option value=""></option>
+                        <option value="user_data" {{ session('selected_data') === 'user_data' ? 'selected' : '' }}>user_data</option>
                         <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
                         <option value="training" {{ session('selected_data') === 'training' ? 'selected' : '' }}>Training</option>
                         <option value="todays" {{ session('selected_data') === 'todays' ? 'selected' : '' }}>Todays</option>
@@ -32,7 +33,45 @@
 
         <table>
             <tbody>
-                @if ($selectedData === 'food')
+                @if ($selectedData === 'user_data')
+                    <form action="{{ route('submitUserData') }}" method="post">
+                        @csrf
+                        <div>
+                            <label for="weight" style="color: white;">体重:</label>
+                            <input type="number" name="weight" id="weight" required>
+                        </div>
+                        <div>
+                            <label for="birthdate" style="color: white;">誕生日:</label>
+                                <select name="birth_year" id="birth_year" required>
+                                    @for ($i = 1900; $i <= now()->year; $i++)
+                                        <option value="{{ $i }}"{{ session('birth_year') == $i ? 'selected' : '' }}>{{ $i }}年</option>
+                                    @endfor
+                                </select>
+                                <select name="birth_month" id="birth_month" required>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}"{{ session('birth_month') == $i ? 'selected' : '' }}>{{ $i }}月</option>
+                                    @endfor
+                                </select>
+                                <select name="birth_day" id="birth_day" required>
+                                    @for ($i = 1; $i <= 31; $i++)
+                                        <option value="{{ $i }}"{{ session('birth_day') == $i ? 'selected' : '' }}>{{ $i }}日</option>
+                                    @endfor
+                                </select>
+                        </div>
+                        <div>
+                            <label for="gender" style="color: white;">性別:</label>
+                            <select name="gender" id="gender" required>
+                                <option value="男"{{ session('gender') == '男' ? 'selected' : '' }}>男性</option>
+                                <option value="女"{{ session('gender') == '女' ? 'selected' : '' }}>女性</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" style="color: white;">Push</button>
+                        </div>
+                    </form>
+
+
+                @elseif ($selectedData === 'food')
                           <!-- Food データの表示 -->
                     @foreach ($data as $food)
                         <tr>
@@ -48,7 +87,7 @@
                     @endforeach
 
                 @elseif ($selectedData === 'training')
-                          <!-- Food データの表示 -->
+                          <!-- Training データの表示 -->
                     @foreach ($data as $training)
                         <tr>
                             <td style="color: white;">{{ $training->name }}</td>
@@ -123,6 +162,8 @@
                             </td>
                         </tr>
                     @endforeach
+
+                
 
                 @else
                           <!-- 何も選択されていない場合の表示 -->
