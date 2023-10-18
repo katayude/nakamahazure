@@ -30,6 +30,7 @@ Route::get('dashboard/recode/create', function () {
     return view('recode/create');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -43,8 +44,8 @@ Route::get('/calendar', function () {
     return view('calendar');
 });
 
-Route::get('/chat', [ChatGptController::class, 'index'])->name('chat_gpt-index');
-Route::post('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
+Route::get('/chat', [ChatGptController::class, 'chat'])->name('chat_gpt-chat');
+Route::get('/dashboard', [ChatGptController::class, 'index'])->name('chat_gpt-index');
 
 
 Route::middleware('auth')->group(function () {
