@@ -20,6 +20,7 @@
                     <select name="selected_data" id="selected_data" style="width: 120px">
                         <option value=""></option>
                         <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
+                        <option value="training" {{ session('selected_data') === 'training' ? 'selected' : '' }}>Training</option>
                         <option value="todays" {{ session('selected_data') === 'todays' ? 'selected' : '' }}>Todays</option>
                         <option value="dairies" {{ session('selected_data') === 'dairies' ? 'selected' : '' }}>Dairies</option>
                     </select>
@@ -38,6 +39,21 @@
                             <td style="color: white;">{{ $food->name }}</td>
                             <td>
                                 <form action="{{ route('food.delete', $food->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" style="color: red;">削除</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                @elseif ($selectedData === 'training')
+                          <!-- Food データの表示 -->
+                    @foreach ($data as $training)
+                        <tr>
+                            <td style="color: white;">{{ $training->name }}</td>
+                            <td>
+                                <form action="{{ route('training.delete', $training->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" style="color: red;">削除</button>
@@ -91,12 +107,13 @@
                                     </div>
                                 </div>
                                 <button type="submit" style="color: white;">Push</button>
+                                <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
                             </form>
                         </td>
                     </tr>
                     @foreach ($data as $dairy)
                         <tr>
-                            <td style="color: white;">{{ App\Models\Dairy::where('id', $dairy->training_id)->value('name') }}</td>
+                            <td style="color: white;">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</td>
                             <td>
                                 <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
                                     @csrf
