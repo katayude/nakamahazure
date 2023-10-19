@@ -12,7 +12,7 @@
                 border-radius: 20px;
                 padding: 5px 10px; /
             }
-            .push-button input[type="submit"] {
+            .push-button button[type="submit"] {
                 background-color: transparent; 
                 border: none; 
                 color: black; 
@@ -33,8 +33,8 @@
                             <div class="flex flex-col mb-4">
                                 <label for="selected_data"><font color="white">データを選択:</font></label>
                                 <div class="flex">
-                                    <select name="selected_data" id="selected_data" style="width: 130px">
-                                        <option value=""></option>
+                                    <select name="selected_data" id="selected_data" style="width: 130px; color:black ">
+                                        <option value="">---</option>
                                         <option value="user_data" {{ session('selected_data') === 'user_data' ? 'selected' : '' }}>user_data</option>
                                         <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
                                         <option value="training" {{ session('selected_data') === 'training' ? 'selected' : '' }}>Training</option>
@@ -43,7 +43,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" style="color: white;">Push</button>
+                            <div class="push-button">
+                                <button type="submit">Push</button>
+                            </div>
                         </form>
                         <table>
                             <tbody>
@@ -127,11 +129,11 @@
                                                 <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
                                                     <label for="selected_date"><font color="white">日付を選択:</font></label>
                                                     <div class="flex">
-                                                        <input type="date" name="selected_date" value="{{ session('selected_date') }}">
+                                                        <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
                                                     </div>
                                                 </div>
                                                 <div class="push-button">
-                                                    <button type="submit" style="color: white;">Push</button>
+                                                    <button type="submit">Push</button>
                                                 </div>
                                                 <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
                                             </form>
@@ -161,11 +163,11 @@
                                                 <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
                                                     <label for="selected_date"><font color="white">日付を選択:</font></label>
                                                     <div class="flex">
-                                                        <input type="date" name="selected_date" value="{{ session('selected_date') }}">
+                                                        <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
                                                     </div>
                                                 </div>
                                                 <div class="push-button">
-                                                    <button type="submit" style="color: white;">Push</button>
+                                                    <button type="submit">Push</button>
                                                 </div>
                                                 <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
                                             </form>
