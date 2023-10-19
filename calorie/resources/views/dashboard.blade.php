@@ -13,6 +13,7 @@
 
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js" type="text/javascript"></script>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <canvas id="graph-area5" height="450" width="210"></canvas>
                         <canvas id="graph-area1" height="450" width="210"></canvas>
                         <canvas id="graph-area2" height="450" width="210"></canvas>
                         <canvas id="graph-area3" height="450" width="210"></canvas>
@@ -20,6 +21,26 @@
 
                     </div>
                     <script type="text/javascript">
+                        // カロリー
+                        var barChartData5 = {
+                            labels : ["摂取カロリー"],
+                            datasets : [
+                                {
+                                    fillColor : "rgba(240,128,128,0.6)",    // 塗りつぶし色
+                                    strokeColor : "rgba(240,128,128,0.9)",  // 枠線の色
+                                    highlightFill: "rgba(255,64,64,0.75)",  // マウスが載った際の塗りつぶし色
+                                    highlightStroke: "rgba(255,64,64,1)",   // マウスが載った際の枠線の色
+                                    data : [{{ $totalNutrition->total_calorie }}] 
+                                },
+                                {
+                                    fillColor : "rgba(151,187,205,0.6)",
+                                    strokeColor : "rgba(151,187,205,0.9)",
+                                    highlightFill : "rgba(64,96,255,0.75)",
+                                    highlightStroke : "rgba(64,96,255,1)",
+                                    data : [95]
+                                }
+                            ]
+                        }
                         // タンパク質
                         var barChartData1 = {
                             labels : ["タンパク質"],
@@ -120,9 +141,13 @@
                                 var ctx4 = document.getElementById("graph-area4").getContext("2d");
                                 window.myBar4 = new Chart(ctx4).Bar(barChartData4);
 
+                                var ctx5 = document.getElementById("graph-area5").getContext("2d");
+                                window.myBar5 = new Chart(ctx5).Bar(barChartData5);
+
                         }
                     </script>
                     <!-- データ -->
+                    <p>摂取カロリー: {{ $totalNutrition->total_calorie }} kcal</p>
                     <p>タンパク質: {{ $totalNutrition->total_protein }} grams</p>
                     <p>炭水化物: {{ $totalNutrition->total_carbohydrate }} grams</p>
                     <p>脂質: {{ $totalNutrition->total_fat }} grams</p>

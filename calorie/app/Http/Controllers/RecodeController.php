@@ -23,10 +23,11 @@ class RecodeController extends Controller
      */
     public function input()
     {
-        $foods = Food::all();
+        $userId = Auth::id();
+        $foods = Food::where('user_id', $userId)->get();
         $ingredients = Ingredient::all();
         $categories = Category::all();
-        $trainings = Training::all();
+        $trainings = Training::where('user_id', $userId)->get();
         return response()->view('recode.create', compact('foods', 'categories', 'trainings', 'ingredients'));
     }
 
