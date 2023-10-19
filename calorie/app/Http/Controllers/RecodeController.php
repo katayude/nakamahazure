@@ -172,6 +172,7 @@ class RecodeController extends Controller
             'birth_month' => 'required|integer|between:1,12',
             'birth_day' => 'required|integer|between:1,31',
             'gender' => 'required|in:男,女',
+            'height' => 'required|integer|between:1,250',
         ]);
 
         // 今日の日付を取得
@@ -198,12 +199,14 @@ class RecodeController extends Controller
         $month = $request->input('birth_month');
         $day = $request->input('birth_day');
         $gender = $request->input('gender');
+        $height = $request->input('height');
         session(['user_data' => $selectedData]);
         session(['birth_year' => $year]);
         session(['birth_month' => $month]);
         session(['birth_day' => $day]);
         session(['gender' => $gender]);
-        return response()->view('edit', compact('selectedData', 'year', 'month', 'day', 'gender'));
+        session(['height' => $height]);
+        return response()->view('edit', compact('selectedData', 'year', 'month', 'day', 'gender','height'));
     }
 
 

@@ -41,6 +41,10 @@
                             <input type="number" name="weight" id="weight" required>
                         </div>
                         <div>
+                            <label for="height" style="color: white;">身長:</label>
+                            <input type="number" name="height" id="height" value="{{ old('height', session('height')) }}" required>
+                        </div>
+                        <div>
                             <label for="birthdate" style="color: white;">誕生日:</label>
                                 <select name="birth_year" id="birth_year" required>
                                     @for ($i = 1900; $i <= now()->year; $i++)
