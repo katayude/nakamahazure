@@ -16,6 +16,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-12',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -26,6 +27,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-13',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -36,6 +38,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-14',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -46,6 +49,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-15',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -56,6 +60,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-16',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -66,6 +71,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-17',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -76,6 +82,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-18',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -86,6 +93,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-19',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -96,6 +104,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-20',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -106,6 +115,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-21',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -116,6 +126,7 @@ class InformationSeeder extends Seeder
             'gender' => '男',  
             'age'=> 10,
             'date'=> '2023-10-22',
+            'height'=> '170',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

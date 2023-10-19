@@ -28,25 +28,39 @@ class NutritionController extends Controller
             'total_fat' => 0,
             'total_carbohydrate' => 0,
             'total_solt' => 0,
+            'total_calorie'=>0.
+        ];
+
+        $totalNutrition = [
+            'total_protein' => 0,
+            'total_fat' => 0,
+            'total_carbohydrate' => 0,
+            'total_solt' => 0,
+            'total_calorie' => 0
         ];
 
         foreach ($todayMeals as $todayMeal) {
             $food = Food::find($todayMeal->food_id);
             $ingredientIds = [$food->ingredient1_id, $food->ingredient2_id, $food->ingredient3_id, $food->ingredient4_id, $food->ingredient5_id];
-            $mealNutrition = Ingredient::whereIn('id', $ingredientIds)
-                ->selectRaw('SUM(protein) as total_protein, SUM(fat) as total_fat, SUM(carbohydrate) as total_carbohydrate, SUM(solt) as total_solt')
-                ->first();
+            $ingredientWeights = [$food->ingredient1_weight, $food->ingredient2_weight, $food->ingredient3_weight, $food->ingredient4_weight, $food->ingredient5_weight];
 
-        // 各栄養素を合算
-        $totalNutrition['total_protein'] += $mealNutrition->total_protein;
-        $totalNutrition['total_fat'] += $mealNutrition->total_fat;
-        $totalNutrition['total_carbohydrate'] += $mealNutrition->total_carbohydrate;
-        $totalNutrition['total_solt'] += $mealNutrition->total_solt;
+            for ($i = 0; $i < count($ingredientIds); $i++) {
+                $ingredient = Ingredient::find($ingredientIds[$i]);
+                if ($ingredient) {
+                    $weightFactor = $ingredientWeights[$i] / 100;
+                    $totalNutrition['total_protein'] += $ingredient->protein * $weightFactor;
+                    $totalNutrition['total_fat'] += $ingredient->fat * $weightFactor;
+                    $totalNutrition['total_carbohydrate'] += $ingredient->carbohydrate * $weightFactor;
+                    $totalNutrition['total_solt'] += $ingredient->solt * $weightFactor;
+                    $totalNutrition['total_calorie'] += $ingredient->calorie * $weightFactor;
+                }
+            }
         }
 
         return view('dashboard', [
             'date' => $date,
             'totalNutrition' => (object) $totalNutrition,
         ]);
+
     }
 }

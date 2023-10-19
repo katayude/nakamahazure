@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Training;
 use App\Models\Ingredient;
@@ -10,6 +11,8 @@ use App\Models\Food;
 use App\Models\Dairy;
 use App\Models\Today;
 use App\Models\User;
+use App\Models\User_information;
+use Carbon\Carbon;
 use Auth;
 
 
@@ -20,10 +23,11 @@ class RecodeController extends Controller
      */
     public function input()
     {
-        $foods = Food::all();
+        $userId = Auth::id();
+        $foods = Food::where('user_id', $userId)->get();
         $ingredients = Ingredient::all();
         $categories = Category::all();
-        $trainings = Training::all();
+        $trainings = Training::where('user_id', $userId)->get();
         return response()->view('recode.create', compact('foods', 'categories', 'trainings', 'ingredients'));
     }
 
@@ -59,6 +63,7 @@ class RecodeController extends Controller
         $selectedDate = null;
         $selectedData = null;
         $data = null;
+        
         return response()->view('edit', compact('selectedData', 'selectedData', 'data'));
     }
 
@@ -87,6 +92,8 @@ class RecodeController extends Controller
             $data = Food::where('user_id', $user->id)->get();
         } elseif ($selectedData === 'training') {
             $data = Training::where('user_id', $user->id)->get();
+        } elseif ($selectedData === 'user_data') {
+            $data = User_information::where('user_id', $user->id)->get();
         }
 
         session(['selected_data' => $selectedData]);
@@ -157,6 +164,51 @@ class RecodeController extends Controller
         $data = Dairy::where('date', $selectedDate)->get();
         return view('edit', compact('selectedData','selectedDate', 'date', 'data'));
     }
+
+    public function submitForm(Request $request) {
+        $data = $request->validate([
+            'weight' => 'required|numeric',
+            'birth_year' => 'required|integer|between:1900,' . now()->year,
+            'birth_month' => 'required|integer|between:1,12',
+            'birth_day' => 'required|integer|between:1,31',
+            'gender' => 'required|in:男,女',
+            'height' => 'required|integer|between:1,250',
+        ]);
+
+        // 今日の日付を取得
+        $data['date'] = now()->format('Y-m-d');
+
+        // 年齢の計算
+        $birthdate = Carbon::createFromDate($data['birth_year'], $data['birth_month'], $data['birth_day']);
+        $data['age'] = $birthdate->age;
+
+        // ログインしているユーザーのIDを取得
+        $data['user_id'] = Auth::id();
+
+        // created_at と updated_at を設定
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+
+        // 不要なキーの削除
+        unset($data['birth_year'], $data['birth_month'], $data['birth_day']);
+
+        // user_informationテーブルにデータを保存
+        DB::table('user_informations')->insert($data);
+        $selectedData = 'user_data';
+        $year = $request->input('birth_year');
+        $month = $request->input('birth_month');
+        $day = $request->input('birth_day');
+        $gender = $request->input('gender');
+        $height = $request->input('height');
+        session(['user_data' => $selectedData]);
+        session(['birth_year' => $year]);
+        session(['birth_month' => $month]);
+        session(['birth_day' => $day]);
+        session(['gender' => $gender]);
+        session(['height' => $height]);
+        return response()->view('edit', compact('selectedData', 'year', 'month', 'day', 'gender','height'));
+    }
+
 
 
 }
