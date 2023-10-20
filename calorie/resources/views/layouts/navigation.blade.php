@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('chat_gpt-index')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('ダッシュボード') }}
                     </x-nav-link>
                     @if (isset($date))
                         <x-nav-link :href="route('dashboardWithDate', ['date' => $date])" :active="request()->fullUrl() === route('dashboardWithDate', ['date' => $date])">
@@ -105,7 +105,7 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('chat_gpt-chat')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('ダッシュボード') }}
             </x-responsive-nav-link>
             @if (isset($date))
                 <x-responsive-nav-link :href="route('dashboardWithDate', ['date' => $date])" :active="request()->fullUrl() === route('dashboardWithDate', ['date' => $date])">

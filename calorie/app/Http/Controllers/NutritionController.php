@@ -9,6 +9,8 @@ namespace App\Http\Controllers;
     use App\Models\Today;
     use App\Models\Ingredient;
     use App\Models\Nutritions;
+    use App\Models\User_information;
+    use Auth;
 
 
 class NutritionController extends Controller
@@ -57,9 +59,41 @@ class NutritionController extends Controller
             }
         }
 
+        $totalNutrition['total_protein'] = round($totalNutrition['total_protein'], 1);
+        $totalNutrition['total_fat'] = round($totalNutrition['total_fat'], 1);
+        $totalNutrition['total_carbohydrate'] = round($totalNutrition['total_carbohydrate'], 1);
+        $totalNutrition['total_solt'] = round($totalNutrition['total_solt'], 1);
+        $totalNutrition['total_calorie'] = round($totalNutrition['total_calorie'], 1);
+
+        $userInfo = User_information::where('user_id',$user->id )->orderBy('id', 'desc')->first();
+
+        if ($userInfo->gender == '男') {
+            $BMR = 66.47 + (13.75 * $userInfo->weight) + (5.003 * $userInfo->height) - (6.75 * Auth::user()->age);
+            $salt = 8;
+        } else { // female
+            $BMR = 655.1 + (9.563 * $userInfo->weight) + (1.850 * $userInfo->height) - (4.676 * Auth::user()->age);
+            $salt = 7;
+        }
+
+        $activityMultiplier = 1.375;
+        $requiredCalories = round($BMR * $activityMultiplier, -1);
+        // タンパク質の計算: 体重 * 1.3
+        $protein = round($userInfo->weight * 1.3, 0);
+
+        // 炭水化物の計算: 必要カロリー * 0.55 / 4
+        $carbohydrate = round($requiredCalories * 0.55 / 4, 0);
+
+        // 脂質の計算: 必要カロリー * 0.25 / 9
+        $fat = round($requiredCalories * 0.25 / 9, 0);
+
         return view('dashboard', [
             'date' => $date,
             'totalNutrition' => (object) $totalNutrition,
+            'requiredCalories' => $requiredCalories,
+            'protein' => $protein,
+            'carbohydrate' => $carbohydrate,
+            'fat' =>$fat,
+            'salt' =>$salt,
         ]);
 
     }

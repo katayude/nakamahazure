@@ -34,11 +34,11 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->insert([
             'name' => '卵',
             'category_id' => '5',
-            'calorie' => '70',       // 生の卵1個当たりの一般的なカロリー
-            'protein' => '6.3',      // 生の卵1個当たりの一般的なタンパク質量
-            'carbohydrate' => '0.4', // 生の卵1個当たりの一般的な炭水化物量
-            'fat' => '5.0',          // 生の卵1個当たりの一般的な脂質量
-            'solt' => '0.2',         // 生の卵1個当たりの一般的な塩分量
+            'calorie' => '140',       // 生の卵100g当たりの一般的なカロリー
+            'protein' => '12.6',      // 生の卵100g当たりの一般的なタンパク質量
+            'carbohydrate' => '0.8', // 生の卵100g当たりの一般的な炭水化物量
+            'fat' => '10.0',          // 生の卵100g当たりの一般的な脂質量
+            'solt' => '0.4',         // 生の卵100g当たりの一般的な塩分量
             'created_at' => now(),
             'updated_at' => now(),
         ]);

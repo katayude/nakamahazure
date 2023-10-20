@@ -57,7 +57,7 @@ class FoodSeeder extends Seeder
             'ingredient1_id' => '10',       // トマト
             'ingredient1_weight' => '100',  // 100g
             'ingredient2_id' => '9',       // ツナ
-            'ingredient2_weight' => '50',   // 50g
+            'ingredient2_weight' => '20',   // 20g
             'ingredient3_id' => null,      // ここでキャベツの情報は提供されていないのでnullと0を入れます。
             'ingredient3_weight' => '0',
             'ingredient4_id' => null,
