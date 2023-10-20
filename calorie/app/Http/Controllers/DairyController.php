@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Training;
 use App\Models\Today;
+use App\Models\User_information;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,7 @@ class DairyController extends Controller
 
         $foodName = $request->input('food_name');
         $trainingName = $request->input('training_name');
+        $trainingMinute = $request->input('training_minutes');
         $date = date('Y-m-d'); // 現在の日付を取得（例: "2023-10-13"）
         $userId = Auth::id();
 
@@ -53,11 +55,22 @@ class DairyController extends Controller
         // trainingテーブルからデータの取得
         $training = Training::where('name', $trainingName)->first();
         if ($training) {
+            // ログインしているユーザーのIDと一致する最新のuser_informationsのレコードを取得
+            $latestUserInformation = User_information::where('user_id', $userId)
+                                                    ->orderBy('id', 'desc')
+                                                    ->first();
+
+            // weightを取得
+            $weight = $latestUserInformation ? $latestUserInformation->weight : 0;
+
+            // 与えられた計算式を使用してカロリーを計算
+            $calculatedCalorie = $training->calorie * $weight * $trainingMinute * 1.05 / 60;
+
             Dairy::create([
                 'user_id' => $userId,
                 'training_id' => $training->id,
                 'date' => $date,
-                'calorie' => $training->calorie
+                'calorie' => $calculatedCalorie
             ]);
         }
 
