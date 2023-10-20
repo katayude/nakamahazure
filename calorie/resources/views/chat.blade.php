@@ -44,26 +44,26 @@
                     <div class="progress-container">
                         <div class="progress-item">
                             <div class="progress-label">摂取カロリー</div>
-                            <progress value={{ $calorie }} max="2650"></progress>
-                            <div class="progress-value">{{ $calorie }}kcal/2650kcal</div>
+                            <progress value={{ $calorie }} max= {{ $requiredCalories }} ></progress>
+                            <div class="progress-value">{{ $calorie }}kcal/{{ $requiredCalories }}kcal</div>
                         </div>
 
                         <div class="progress-item">
                             <div class="progress-label">たんぱく質</div>
-                            <progress value={{ $protein }} max="65"></progress>
-                            <div class="progress-value">{{ $protein }}g/65g</div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-label">脂質</div>
-                            <progress value={{ $fat }} max="70"></progress>
-                            <div class="progress-value">{{ $fat }}g/70g</div>
+                            <progress value={{ $protein }} max={{ $needprotein }}></progress>
+                            <div class="progress-value">{{ $protein }}g/{{ $needprotein }}g</div>
                         </div>
 
                         <div class="progress-item">
                             <div class="progress-label">炭水化物</div>
-                            <progress value={{ $carbohydrate }} max="450"></progress>
-                            <div class="progress-value">{{ $carbohydrate }}g/450g</div>
+                            <progress value={{ $carbohydrate }} max={{ $needcarbohydrate }}></progress>
+                            <div class="progress-value">{{ $carbohydrate }}g/{{ $needcarbohydrate }}g</div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-label">脂質</div>
+                            <progress value={{ $fat }} max={{ $needfat }}></progress>
+                            <div class="progress-value">{{ $fat }}g/{{ $needfat }}g</div>
                         </div>
                     </div>
 

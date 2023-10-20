@@ -152,6 +152,7 @@
                     <p>炭水化物: {{ $totalNutrition->total_carbohydrate }} g / {{$carbohydrate}} g</p>
                     <p>脂質: {{ $totalNutrition->total_fat }} g / {{$fat}} g</p>
                     <p>塩分: {{ $totalNutrition->total_solt}} g / {{$salt}} g</p>
+                    <p>トレーニング: {{ $consumeCalories }} kcal</p>
 
                     @else
                         {{ __("You're logged in!") }}

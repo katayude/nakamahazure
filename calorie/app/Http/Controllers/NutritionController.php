@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
     use App\Models\User;
     use App\Models\Food;
     use App\Models\Today;
+    use App\Models\Dairy;
     use App\Models\Ingredient;
     use App\Models\Nutritions;
     use App\Models\User_information;
@@ -86,6 +87,10 @@ class NutritionController extends Controller
         // 脂質の計算: 必要カロリー * 0.25 / 9
         $fat = round($requiredCalories * 0.25 / 9, 0);
 
+        $consumeCalories = Dairy::where('user_id', $user->id)
+                ->where('date', $date)
+                ->sum('calorie');
+
         return view('dashboard', [
             'date' => $date,
             'totalNutrition' => (object) $totalNutrition,
@@ -94,6 +99,7 @@ class NutritionController extends Controller
             'carbohydrate' => $carbohydrate,
             'fat' =>$fat,
             'salt' =>$salt,
+            'consumeCalories'=>$consumeCalories,
         ]);
 
     }
