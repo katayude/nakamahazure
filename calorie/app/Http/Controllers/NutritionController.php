@@ -21,6 +21,12 @@ class NutritionController extends Controller
         // ログインしているユーザを取得
         $user = auth()->user();
 
+        $weight = User_information::where('user_id', Auth::id())
+            ->where('date', $date)
+            ->orderBy('id', 'desc')
+            ->first()
+            ->weight;
+
         // 指定された日付に食べた料理を取得
         $todayMeals = Today::where('date', $date)
             ->where('user_id', $user->id)
@@ -100,6 +106,7 @@ class NutritionController extends Controller
             'fat' =>$fat,
             'salt' =>$salt,
             'consumeCalories'=>$consumeCalories,
+            'weight'=>$weight,
         ]);
 
     }

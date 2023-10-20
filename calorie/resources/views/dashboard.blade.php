@@ -153,6 +153,7 @@
                     <p>脂質: {{ $totalNutrition->total_fat }} g / {{$fat}} g</p>
                     <p>塩分: {{ $totalNutrition->total_solt}} g / {{$salt}} g</p>
                     <p>トレーニング: {{ $consumeCalories }} kcal</p>
+                    <p>体重: {{ $weight }}kg</p>
 
                     @else
                         {{ __("You're logged in!") }}

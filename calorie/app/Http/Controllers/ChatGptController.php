@@ -12,6 +12,7 @@ use App\Models\Ingredient;
 use App\Models\Nutritions;
 use App\Models\User_information;
 use App\Models\Dairy;
+use Carbon\Carbon;
 use Auth;
 
 class ChatGptController extends Controller
@@ -100,8 +101,29 @@ class ChatGptController extends Controller
 
         $chat = "今日は何を食べたかな？";
 
+        $endDate = Carbon::today();
+        $startDate = $endDate->copy()->subDays(6);
 
-        return view('chat', compact('chat', 'protein', 'fat', 'carbohydrate', 'calorie', 'todayFood','needprotein','needcarbohydrate','needfat','requiredCalories','consumeCalories'));
+        $dates = [];
+        for ($currentDate = $startDate; $currentDate <= $endDate; $currentDate->addDay()) {
+            $dates[] = $currentDate->format('Y-m-d');
+        }
+
+        $weights = [];
+        foreach ($dates as $currentDate) {
+            $weight = User_information::where('user_id', Auth::id())
+                        ->where('date', $currentDate)
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+            $weights[] = $weight ? $weight->weight : null;
+        }
+
+
+        return view('chat', compact('chat', 'protein', 'fat', 'carbohydrate', 'calorie', 'todayFood','needprotein','needcarbohydrate','needfat','requiredCalories','consumeCalories', 'dates', 'weights'));
+
+
+
     }
 
     public function chat(Request $request)

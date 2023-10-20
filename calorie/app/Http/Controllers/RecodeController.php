@@ -95,11 +95,37 @@ class RecodeController extends Controller
         } elseif ($selectedData === 'user_data') {
             $data = User_information::where('user_id', $user->id)->get();
         }
+        $user_id = Auth::id();
+
+        $latestUserInfo = \DB::table('user_informations')
+                            ->where('user_id', $user_id)
+                            ->orderBy('id', 'desc')
+                            ->first();
+
+        if ($latestUserInfo) {
+            $birthdate = new \DateTime($latestUserInfo->birthday);
+            $year = $birthdate->format('Y');
+            $month = $birthdate->format('m');
+            $day = $birthdate->format('d');
+            $gender = $latestUserInfo->gender;
+            $height = $latestUserInfo->height;
+        } else {
+            $year = null;
+            $month = null;
+            $day = null;
+            $gender = null;
+            $height = null;
+        }
 
         session(['selected_data' => $selectedData]);
+        session(['user_data' => $selectedData]);
+        session(['birth_year' => $year]);
+        session(['birth_month' => $month]);
+        session(['birth_day' => $day]);
+        session(['gender' => $gender]);
+        session(['height' => $height]);
+        return response()->view('edit', compact('selectedData', 'year', 'month', 'day', 'gender','height','data'));
 
-
-        return view('edit', compact('selectedData', 'data'));
     }
 
     public function showDate(Request $request) {
@@ -181,6 +207,9 @@ class RecodeController extends Controller
         // 年齢の計算
         $birthdate = Carbon::createFromDate($data['birth_year'], $data['birth_month'], $data['birth_day']);
         $data['age'] = $birthdate->age;
+
+        $birthday = sprintf('%04d-%02d-%02d', $year, $month, $day);
+        $data['birthday'] = $birthday;
 
         // ログインしているユーザーのIDを取得
         $data['user_id'] = Auth::id();

@@ -70,16 +70,104 @@
                     <br>
                     <br>
                     <br>
-                    <ul class="meal-list">
-                        @foreach ($todayFood as $meal)
-                            <li class="meal-item">
-                                <span class="meal-name">{{ $meal->name }}</span>
-                                <span class="meal-calorie">{{ $meal->calorie }}kcal</span>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <style>
+                        .flex-container {
+                            display: flex;
+                            justify-content: space-between; /* アイテムの間に均等なスペースを作成 */
+                        }
+
+                        .meal-item.blue-border {
+                            border-left: 5px solid blue;
+                        }
+
+                        .meal-item {
+                            width: 320px;  /* ボックスの幅を200pxに固定 */
+                            height: 50px;  /* ボックスの高さを50pxに固定 */
+                        }
+
+                        #chart {
+                            width: 600px;
+                            height: 400px;
+                        }
+
+                    </style>
+
+                    <div class="flex-container">
+
+                        <div>
+                            <ul class="meal-list">
+                                @foreach ($todayFood as $meal)
+                                    <li class="meal-item">
+                                        <span class="meal-name">{{ $meal->name }}</span>
+                                        <span class="meal-calorie">{{ $meal->calorie }}kcal</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <ul class="meal-list">
+                                <li class="meal-item blue-border">
+                                    <span class="meal-name">トレーニング</span>
+                                    <span class="meal-calorie">{{ $consumeCalories }}kcal</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div style="width: 50%;">
+                            <canvas id="chart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script>
+                            var ctx = document.getElementById('chart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: @json($dates),  // 日付データ
+                                    datasets: [{
+                                        label: '体重の推移',
+                                        data: @json($weights),  // 体重データ
+                                        backgroundColor: 'rgba(255, 255, 255, 1)',
+                                        borderColor: 'rgba(255, 255, 255, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                color: 'rgba(255, 255, 255, 1)'  // Y軸の目盛りの文字色を白に設定
+                                            }
+                                        },
+                                        x: {
+                                            ticks: {
+                                                color: 'rgba(255, 255, 255, 1)'  // X軸の目盛りの文字色を白に設定
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            labels: {
+                                                color: 'rgba(255, 255, 255, 1)'  // 凡例の文字色を白に設定
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </body>
+                    </html>
+
 
                     <br>
+
+
+
+                    <!--以下でキャラクターの表示-->
                     <br>
 
                     <div class="container">
@@ -92,8 +180,6 @@
                             {{ $chat }}
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
