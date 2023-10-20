@@ -6,11 +6,12 @@
   </x-slot>
     <head>
         <style>
+            /*Pushボタン*/ 
             .push-button {
                 display: inline-block; 
                 background-color: white ; 
                 border-radius: 20px;
-                padding: 5px 10px; /
+                padding: 5px 10px;
             }
             .push-button button[type="submit"] {
                 background-color: transparent; 
@@ -19,32 +20,54 @@
             }
             .push-button:hover{
                 background-color: gray;
+                cursor: pointer;
             }
+            /* 削除ボタン */
+            .delete-button{
+                display: inline-block; 
+                background-color: red ; 
+                border-radius: 5px;
+                padding: 5px 10px;
+            }
+            .delete-button button[type="submit"] {
+                background-color: transparent; 
+                border: none; 
+            }
+            .delete-button:hover{
+                background-color: maroon;
+                cursor: pointer;
+            }
+            .flex-container{
+                
+            }
+
         </style>
     </head>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="container">
+                    <div class="flex-container">
                         <!-- HTML部分 -->
                         <form action="{{ route('data.show') }}" method="GET">
                             @csrf
-                            <div class="flex flex-col mb-4">
-                                <label for="selected_data"><font color="white">データを選択:</font></label>
-                                <div class="flex">
-                                    <select name="selected_data" id="selected_data" style="width: 130px; color:black ">
-                                        <option value="">---</option>
-                                        <option value="user_data" {{ session('selected_data') === 'user_data' ? 'selected' : '' }}>user_data</option>
-                                        <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
-                                        <option value="training" {{ session('selected_data') === 'training' ? 'selected' : '' }}>Training</option>
-                                        <option value="todays" {{ session('selected_data') === 'todays' ? 'selected' : '' }}>Todays</option>
-                                        <option value="dairies" {{ session('selected_data') === 'dairies' ? 'selected' : '' }}>Dairies</option>
-                                    </select>
+                            <div class="flex-container">
+                                <div class="flex flex-col mb-4">
+                                    <label for="selected_data"><font color="white">データを選択:</font></label>
+                                    <div class="flex">
+                                        <select name="selected_data" id="selected_data" style="width: 130px; color:black ">
+                                            <option value="">---</option>
+                                            <option value="user_data" {{ session('selected_data') === 'user_data' ? 'selected' : '' }}>user_data</option>
+                                            <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
+                                            <option value="training" {{ session('selected_data') === 'training' ? 'selected' : '' }}>Training</option>
+                                            <option value="todays" {{ session('selected_data') === 'todays' ? 'selected' : '' }}>Todays</option>
+                                            <option value="dairies" {{ session('selected_data') === 'dairies' ? 'selected' : '' }}>Dairies</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="push-button">
-                                <button type="submit">Push</button>
+                                <div class="push-button">
+                                    <button type="submit">Push</button>
+                                </div>
                             </div>
                         </form>
                         <table>
@@ -99,7 +122,9 @@
                                                 <form action="{{ route('food.delete', $food->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" style="color: red;">削除</button>
+                                                    <div class="delete-button">
+                                                        <button type="submit">×削除</button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>
@@ -114,7 +139,9 @@
                                                 <form action="{{ route('training.delete', $training->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" style="color: red;">削除</button>
+                                                    <div class="delete-button">
+                                                        <button type="submit">×削除</button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>
@@ -147,7 +174,9 @@
                                                 <form action="{{ route('today.delete', $today->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" style="color: red;">削除</button>
+                                                    <div class="delete-button">
+                                                        <button type="submit" >×削除</button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>
@@ -180,7 +209,9 @@
                                                 <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" style="color: red;">削除</button>
+                                                    <div class="delete-button">
+                                                        <button type="submit" >×削除</button>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>
