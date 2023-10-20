@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
     use App\Models\Ingredient;
     use App\Models\Nutritions;
     use App\Models\User_information;
+    use stdClass;
     use Auth;
 
 
@@ -21,11 +22,14 @@ class NutritionController extends Controller
         // ログインしているユーザを取得
         $user = auth()->user();
 
-        $weight = User_information::where('user_id', Auth::id())
+        $userweight = User_information::where('user_id', Auth::id())
             ->where('date', $date)
             ->orderBy('id', 'desc')
-            ->first()
-            ->weight;
+            ->first();
+
+        $weight = $userweight ? $userweight->weight : 0;
+        
+        
 
         // 指定された日付に食べた料理を取得
         $todayMeals = Today::where('date', $date)
@@ -73,6 +77,13 @@ class NutritionController extends Controller
         $totalNutrition['total_calorie'] = round($totalNutrition['total_calorie'], 1);
 
         $userInfo = User_information::where('user_id',$user->id )->orderBy('id', 'desc')->first();
+
+        if (!$userInfo) {
+            $userInfo = new stdClass();  // 空のオブジェクトを作成
+            $userInfo->gender = '男';
+            $userInfo->weight = 60;
+            $userInfo->height = 170;
+        }
 
         if ($userInfo->gender == '男') {
             $BMR = 66.47 + (13.75 * $userInfo->weight) + (5.003 * $userInfo->height) - (6.75 * Auth::user()->age);

@@ -122,6 +122,8 @@
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                         <script>
                             var ctx = document.getElementById('chart').getContext('2d');
+                            var weights = @json($weights); // 体重データを変数に代入
+                            var currentWeight = weights.slice(-1)[0]; // 体重データの最後の値を取得
                             var chart = new Chart(ctx, {
                                 type: 'line',
                                 data: {
@@ -137,7 +139,8 @@
                                 options: {
                                     scales: {
                                         y: {
-                                            beginAtZero: true,
+                                            min: currentWeight - 10,  // 今日の体重から10kg減った値
+                                            max: currentWeight + 10,  // 今日の体重から10kg増えた値
                                             ticks: {
                                                 color: 'rgba(255, 255, 255, 1)'  // Y軸の目盛りの文字色を白に設定
                                             }

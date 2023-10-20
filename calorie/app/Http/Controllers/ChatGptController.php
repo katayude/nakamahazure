@@ -13,6 +13,7 @@ use App\Models\Nutritions;
 use App\Models\User_information;
 use App\Models\Dairy;
 use Carbon\Carbon;
+use stdClass;
 use Auth;
 
 class ChatGptController extends Controller
@@ -70,6 +71,13 @@ class ChatGptController extends Controller
                 $totalNutrition['total_calorie'] = round($totalNutrition['total_calorie'], 1);
 
                 $userInfo = User_information::where('user_id',$user->id )->orderBy('id', 'desc')->first();
+
+                if (!$userInfo) {
+                    $userInfo = new stdClass();  // 空のオブジェクトを作成
+                    $userInfo->gender = '男';
+                    $userInfo->weight = 60;
+                    $userInfo->height = 170;
+                }
 
                 if ($userInfo->gender == '男') {
                     $BMR = 66.47 + (13.75 * $userInfo->weight) + (5.003 * $userInfo->height) - (6.75 * Auth::user()->age);
