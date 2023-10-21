@@ -5,9 +5,11 @@
     </h2>
   </x-slot>
     <head>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <style>
             /*Pushボタン*/ 
             .push-button {
+                margin-bottom: 15px;
                 display: inline-block; 
                 background-color: white ; 
                 border-radius: 20px;
@@ -24,7 +26,8 @@
             }
             /* 削除ボタン */
             .delete-button{
-                display: inline-block; 
+                margin:5px;
+                height:40px;
                 background-color: red ; 
                 border-radius: 5px;
                 padding: 5px 10px;
@@ -37,17 +40,22 @@
                 background-color: maroon;
                 cursor: pointer;
             }
-            .flex-container{
-                
+            .meal-list {
+                list-style-type: none;
+                padding: 0;
             }
-
+            .meal-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
         </style>
     </head>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="flex-container">
+                    <div class="flex-container" style="diaplay:flex">
                         <!-- HTML部分 -->
                         <form action="{{ route('data.show') }}" method="GET">
                             @csrf
@@ -69,161 +77,163 @@
                                     <button type="submit">Push</button>
                                 </div>
                             </div>
-                        </form>
-                        <table>
-                            <tbody>
-                                @if ($selectedData === 'user_data')
-                                    <form action="{{ route('submitUserData') }}" method="post">
-                                        @csrf
-                                        <div>
-                                            <label for="weight" style="color: white;">体重:</label>
-                                            <input type="number" min="0" style="color: black;" name="weight" id="weight" required>
-                                        </div>
-                                        <div>
-                                            <label for="height" style="color: white;">身長:</label>
-                                            <input type="number" min="0" style="color: black;" name="height" id="height" value="{{ old('height', session('height')) }}" required>
-                                        </div>
-                                        <div>
-                                            <label for="birthdate" style="color: white;">誕生日:</label>
-                                                <select name="birth_year" style="color: black;" id="birth_year" required>
-                                                    @for ($i = 1900; $i <= now()->year; $i++)
-                                                        <option value="{{ $i }}"{{ session('birth_year') == $i ? 'selected' : '' }}>{{ $i }}年</option>
-                                                    @endfor
+                            </form>
+                            <table>
+                                <tbody>
+                                    @if ($selectedData === 'user_data')
+                                        <form action="{{ route('submitUserData') }}" method="post">
+                                            @csrf
+                                            <div>
+                                                <label for="weight" style="color: white;">体重:</label>
+                                                <input type="number" min="0" style="color: black;" name="weight" id="weight" required>
+                                            </div>
+                                            <div>
+                                                <label for="height" style="color: white;">身長:</label>
+                                                <input type="number" min="0" style="color: black;" name="height" id="height" value="{{ old('height', session('height')) }}" required>
+                                            </div>
+                                            <div>
+                                                <label for="birthdate" style="color: white;">誕生日:</label>
+                                                    <select name="birth_year" style="color: black;" id="birth_year" required>
+                                                        @for ($i = 1900; $i <= now()->year; $i++)
+                                                            <option value="{{ $i }}"{{ session('birth_year') == $i ? 'selected' : '' }}>{{ $i }}年</option>
+                                                        @endfor
+                                                    </select>
+                                                    <select name="birth_month" style="color: black;" id="birth_month" required>
+                                                        @for ($i = 1; $i <= 12; $i++)
+                                                            <option value="{{ $i }}"{{ session('birth_month') == $i ? 'selected' : '' }}>{{ $i }}月</option>
+                                                        @endfor
+                                                    </select>
+                                                    <select name="birth_day" style="color: black;" id="birth_day" required>
+                                                        @for ($i = 1; $i <= 31; $i++)
+                                                            <option value="{{ $i }}"{{ session('birth_day') == $i ? 'selected' : '' }}>{{ $i }}日</option>
+                                                        @endfor
+                                                    </select>
+                                            </div>
+                                            <div>
+                                                <label for="gender" style="color: white;">性別:</label>
+                                                <select name="gender" style="color: black;" id="gender" required>
+                                                    <option value="男"{{ session('gender') == '男' ? 'selected' : '' }}>男性</option>
+                                                    <option value="女"{{ session('gender') == '女' ? 'selected' : '' }}>女性</option>
                                                 </select>
-                                                <select name="birth_month" style="color: black;" id="birth_month" required>
-                                                    @for ($i = 1; $i <= 12; $i++)
-                                                        <option value="{{ $i }}"{{ session('birth_month') == $i ? 'selected' : '' }}>{{ $i }}月</option>
-                                                    @endfor
-                                                </select>
-                                                <select name="birth_day" style="color: black;" id="birth_day" required>
-                                                    @for ($i = 1; $i <= 31; $i++)
-                                                        <option value="{{ $i }}"{{ session('birth_day') == $i ? 'selected' : '' }}>{{ $i }}日</option>
-                                                    @endfor
-                                                </select>
-                                        </div>
-                                        <div>
-                                            <label for="gender" style="color: white;">性別:</label>
-                                            <select name="gender" style="color: black;" id="gender" required>
-                                                <option value="男"{{ session('gender') == '男' ? 'selected' : '' }}>男性</option>
-                                                <option value="女"{{ session('gender') == '女' ? 'selected' : '' }}>女性</option>
-                                            </select>
-                                        </div>
-                                        <div class="push-button">
-                                            <button type="submit">Push</button>
-                                        </div>
-                                    </form>
+                                            </div>
+                                            <div class="push-button">
+                                                <button type="submit">Push</button>
+                                            </div>
+                                        </form>
 
-                                @elseif ($selectedData === 'food')
-                                        <!-- Food データの表示 -->
-                                    @foreach ($data as $food)
-                                        <tr>
-                                            <td style="color: white;">{{ $food->name }}</td>
-                                            <td>
+                                    @elseif ($selectedData === 'food')
+                                            <!-- Food データの表示 -->
+                                        @foreach ($data as $food)
+                                        <span class="food-content" style="display:flex;">
+                                            <ul class="meal-list" style="list-style: none;">
+                                                <li class="meal-item" style="margin-left:30px">
+                                                    <span class="meal-name">{{ $food->name }}</span>
+                                                </li>
+                                            </ul>
                                                 <form action="{{ route('food.delete', $food->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <div class="delete-button">
+                                                    <span class="delete-button">
                                                         <button type="submit">×削除</button>
-                                                    </div>
+                                                    </span>
                                                 </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        </span>
+                                        @endforeach
 
-                                @elseif ($selectedData === 'training')
-                                        <!-- Training データの表示 -->
-                                    @foreach ($data as $training)
+                                    @elseif ($selectedData === 'training')
+                                            <!-- Training データの表示 -->
+                                        @foreach ($data as $training)
+                                            <tr>
+                                                <td style="color: white;">{{ $training->name }}</td>
+                                                <td>
+                                                    <form action="{{ route('training.delete', $training->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="delete-button">
+                                                            <button type="submit">×削除</button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    @elseif ($selectedData === 'todays')
+                                            <!-- Todays データの表示 -->
                                         <tr>
-                                            <td style="color: white;">{{ $training->name }}</td>
                                             <td>
-                                                <form action="{{ route('training.delete', $training->id) }}" method="POST">
+                                                <form action="{{ route('date.show') }}" method="GET">
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <div class="delete-button">
-                                                        <button type="submit">×削除</button>
+                                                    <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
+                                                        <label for="selected_date"><font color="white">日付を選択:</font></label>
+                                                        <div class="flex">
+                                                            <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
+                                                        </div>
                                                     </div>
+                                                    <div class="push-button">
+                                                        <button type="submit">Push</button>
+                                                    </div>
+                                                    <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
 
-                                @elseif ($selectedData === 'todays')
-                                        <!-- Todays データの表示 -->
-                                    <tr>
-                                        <td>
-                                            <form action="{{ route('date.show') }}" method="GET">
-                                                @csrf
-                                                <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
-                                                    <label for="selected_date"><font color="white">日付を選択:</font></label>
-                                                    <div class="flex">
-                                                        <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
-                                                    </div>
-                                                </div>
-                                                <div class="push-button">
-                                                    <button type="submit">Push</button>
-                                                </div>
-                                                <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        @foreach ($data as $today)
+                                            <tr>
+                                                <td style="color: white;">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</td>
+                                                <td>
+                                                    <form action="{{ route('today.delete', $today->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="delete-button">
+                                                            <button type="submit" >×削除</button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                    @foreach ($data as $today)
+
+                                    @elseif ($selectedData === 'dairies')
+                                            <!-- Dairies データの表示 -->
                                         <tr>
-                                            <td style="color: white;">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</td>
                                             <td>
-                                                <form action="{{ route('today.delete', $today->id) }}" method="POST">
+                                                <form action="{{ route('date.show') }}" method="GET">
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <div class="delete-button">
-                                                        <button type="submit" >×削除</button>
+                                                    <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
+                                                        <label for="selected_date"><font color="white">日付を選択:</font></label>
+                                                        <div class="flex">
+                                                            <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
+                                                        </div>
                                                     </div>
+                                                    <div class="push-button">
+                                                        <button type="submit">Push</button>
+                                                    </div>
+                                                    <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
-
-
-                                @elseif ($selectedData === 'dairies')
-                                        <!-- Dairies データの表示 -->
-                                    <tr>
-                                        <td>
-                                            <form action="{{ route('date.show') }}" method="GET">
-                                                @csrf
-                                                <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
-                                                    <label for="selected_date"><font color="white">日付を選択:</font></label>
-                                                    <div class="flex">
-                                                        <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
-                                                    </div>
-                                                </div>
-                                                <div class="push-button">
-                                                    <button type="submit">Push</button>
-                                                </div>
-                                                <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @foreach ($data as $dairy)
+                                        @foreach ($data as $dairy)
+                                            <tr>
+                                                <td style="color: white;">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</td>
+                                                <td>
+                                                    <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="delete-button">
+                                                            <button type="submit" >×削除</button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <!-- 何も選択されていない場合の表示 -->
                                         <tr>
-                                            <td style="color: white;">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</td>
-                                            <td>
-                                                <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="delete-button">
-                                                        <button type="submit" >×削除</button>
-                                                    </div>
-                                                </form>
-                                            </td>
+                                            <td style="color: white;">No data selected</td>
                                         </tr>
-                                    @endforeach
-                                @else
-                                    <!-- 何も選択されていない場合の表示 -->
-                                    <tr>
-                                        <td style="color: white;">No data selected</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
+                                    @endif
+                                </tbody>
+                            </table>
                     </div>
                 </div>
             </div>

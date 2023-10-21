@@ -65,7 +65,7 @@
                         <form method="post" action="{{ route('food.store') }}">
                             @csrf
                             <p>食事を登録 </p>
-                            <input type="text" name="name" value="料理名" style="color: black;">
+                            <input type="text" name="name" value="" style="color: black;" placeholder="料理名">
                             <select name="ingredient1_id" style="color: black;">
                                 <option value="">---</option>
                                 <?php
@@ -121,7 +121,7 @@
                             <form method="post" action="{{ route('training.store') }}">
                                 @csrf
                                 <p>トレーニングを登録 </p>
-                                <input type="text" name="name" value="トレーニング名" style="color: black;">
+                                <input type="text" name="name" value="" style="color: black;" placeholder="トレーニング名">
                                 <input type="number" min="0" name="calorie" value="１分間の消費カロリー" style="color: black;">
                                 <div class="button-container">
                                     <input type="submit" value="登録">
