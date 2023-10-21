@@ -77,25 +77,25 @@
                                         @csrf
                                         <div>
                                             <label for="weight" style="color: white;">体重:</label>
-                                            <input type="number" name="weight" id="weight" required>
+                                            <input type="number" style="color: black;" name="weight" id="weight" required>
                                         </div>
                                         <div>
                                             <label for="height" style="color: white;">身長:</label>
-                                            <input type="number" name="height" id="height" value="{{ old('height', session('height')) }}" required>
+                                            <input type="number" style="color: black;" name="height" id="height" value="{{ old('height', session('height')) }}" required>
                                         </div>
                                         <div>
                                             <label for="birthdate" style="color: white;">誕生日:</label>
-                                                <select name="birth_year" id="birth_year" required>
+                                                <select name="birth_year" style="color: black;" id="birth_year" required>
                                                     @for ($i = 1900; $i <= now()->year; $i++)
                                                         <option value="{{ $i }}"{{ session('birth_year') == $i ? 'selected' : '' }}>{{ $i }}年</option>
                                                     @endfor
                                                 </select>
-                                                <select name="birth_month" id="birth_month" required>
+                                                <select name="birth_month" style="color: black;" id="birth_month" required>
                                                     @for ($i = 1; $i <= 12; $i++)
                                                         <option value="{{ $i }}"{{ session('birth_month') == $i ? 'selected' : '' }}>{{ $i }}月</option>
                                                     @endfor
                                                 </select>
-                                                <select name="birth_day" id="birth_day" required>
+                                                <select name="birth_day" style="color: black;" id="birth_day" required>
                                                     @for ($i = 1; $i <= 31; $i++)
                                                         <option value="{{ $i }}"{{ session('birth_day') == $i ? 'selected' : '' }}>{{ $i }}日</option>
                                                     @endfor
@@ -103,13 +103,13 @@
                                         </div>
                                         <div>
                                             <label for="gender" style="color: white;">性別:</label>
-                                            <select name="gender" id="gender" required>
+                                            <select name="gender" style="color: black;" id="gender" required>
                                                 <option value="男"{{ session('gender') == '男' ? 'selected' : '' }}>男性</option>
                                                 <option value="女"{{ session('gender') == '女' ? 'selected' : '' }}>女性</option>
                                             </select>
                                         </div>
                                         <div class="push-button">
-                                            <button type="submit" style="color: white;">Push</button>
+                                            <button type="submit">Push</button>
                                         </div>
                                     </form>
 
