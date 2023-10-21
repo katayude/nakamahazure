@@ -208,7 +208,7 @@ class RecodeController extends Controller
         $birthdate = Carbon::createFromDate($data['birth_year'], $data['birth_month'], $data['birth_day']);
         $data['age'] = $birthdate->age;
 
-        $birthday = sprintf('%04d-%02d-%02d', $year, $month, $day);
+        $birthday = sprintf('%04d-%02d-%02d', $data['birth_year'], $data['birth_month'], $data['birth_day']);
         $data['birthday'] = $birthday;
 
         // ログインしているユーザーのIDを取得

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Training;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class TrainingController extends Controller
 {
@@ -28,10 +30,14 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
-        $result = Training::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = Auth::id(); // 現在のログインユーザーのIDを取得して配列に追加
+
+        $result = Training::create($data);
 
         return redirect()->route('calorie.input');
     }
+
 
     /**
      * Display the specified resource.
