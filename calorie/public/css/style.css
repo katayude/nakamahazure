@@ -204,11 +204,11 @@ h1 {
     border: none;
     color: black;
 }
-
 .send-button:hover {
     background-color: gray;
     cursor: pointer;
 }
+
 /* 削除ボタン */
 .delete-button{
     margin:5px;
@@ -239,24 +239,25 @@ table.create_select th{
 table.create_food {
     padding: 10px;
     width: 85%;
-    height: 300px;
+    height: 330px;
     margin: 0 auto;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
 }
-
 table.create_food th {
     width: 20%;
+}
+table.create_food td.ingredients {
+    width: 50%;
+}
+table.create_food td.button {
+    position:right 30%;
 }
 table.create_training {
     padding: 10px;
     width: 85%;
-    height: 100px;
+    height: 120px;
     margin: 0 auto;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
-}
-
-table.create_training th {
-    width: 20%;
 }

@@ -56,7 +56,7 @@
                                                     <input class="datas" type="number" min="0" name="training_minutes" value="" style="color: white;" placeholder="トレーニング時間(分)">
                                                 </label>
                                             </td>
-                                            <td style="position:bottom">
+                                            <td class="button">
                                                 <div class="send-button">
                                                     <input type="submit" value="送信">
                                                 </div>
@@ -75,7 +75,7 @@
                                                 <p>料理名を入力</p>
                                                 <input type="text" class="datas" name="name" value="" style="color: white;" placeholder="料理名"><br>
                                             </td>
-                                            <td>
+                                            <td class="ingredients">
                                             <p>材料を入力</p>
                                                 <select name="ingredient1_id" class="datas" style="color: white;">
                                                     <option value="">---</option>
@@ -123,8 +123,8 @@
                                                 </select>
                                                 <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient5_weight" value="" style="color: whi;">
                                             </td>
-                                            <td>
-                                                <div class="button-container">
+                                            <td class="button">
+                                                <div class="send-button">
                                                     <input type="submit" value="登録">
                                                 </div>
                                             </td>
@@ -138,13 +138,13 @@
                                     <table class="create_training">
                                         <tr>
                                             <th>トレーニングを登録</th>
-                                            <td>
+                                            <td class="training">
                                                 <p>トレーニングを入力</p>
                                                 <input type="text" name="name" class="datas" value="" style="color: black;" placeholder="トレーニング名">
                                                 <input type="number" min="0" name="calorie" class="datas" value="" style="color: black;" placeholder="1分間のカロリー(kcal)">
                                             </td>
                                             <td>
-                                                <div class="button-container">
+                                                <div class="send-button">
                                                     <input type="submit" value="登録">
                                                 </div>
                                             </td>
