@@ -195,7 +195,7 @@ h1 {
     width: 70px;
     text-align: center;
     display: inline-block;
-    background-color: rgb(40, 40, 153);
+    background-color: green;
     border-radius: 20px;
     padding: 5px 10px;
 }
@@ -227,48 +227,36 @@ h1 {
 }
 table.create_select {
     padding: 10px;
-    width: 80%;
+    width: 85%;
+    height: 200px;
     margin: 0 auto;
-    border: 1px solid #e5e5e5;
+    border-bottom: 1px solid lightgray;
+    border-top:1px solid lightgray ;
 }
-table.create_select tr {
-    border-top: 1px solid #e5e5e5;
+table.create_select th{
+    width:20%;
+}
+table.create_food {
     padding: 10px;
-}
-.single .entry-content table.create_select,
-.page .entry-content table.create_select {
-    display: table;
-}
-.create_select input,
-.create_select textarea {
-    border: 1px solid #d8d8d8;
+    width: 85%;
+    height: 300px;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
 
-.create_select ::placeholder {
-    color: #797979;
+table.create_food th {
+    width: 20%;
 }
-@media screen and (min-width: 768px) {
-    .create_select th {
-        width: 20%;
-        /*横幅*/
-        background-color: #b6c3f7;
-        /*ブルーグレー*/
-    }
+table.create_training {
+    padding: 10px;
+    width: 85%;
+    height: 100px;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
-@media screen and (max-width: 768px) {
-    table.create_select {
-        width: 95%;
-    }
 
-    .create_select tr,
-    .create_select td,
-    .create_select th {
-        display: block;
-        width: 100%;
-        line-height: 2.5em;
-    }
-
-    .create_select th {
-        background-color: #ebedf5;
-    }
+table.create_training th {
+    width: 20%;
 }

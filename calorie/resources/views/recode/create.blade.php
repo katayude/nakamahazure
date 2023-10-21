@@ -9,6 +9,18 @@
     <head>
         <meta charset='utf-8' />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <style>
+            select.datas{
+                background-color: rgb(31,41,55);
+                color: white;
+                margin-bottom: 15px;
+                margin-left: 20px;
+            }
+            input.datas{
+                background-color: rgb(31,41,55);
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <div class="py-12">
@@ -21,102 +33,123 @@
                                     @csrf
                                     <table class="create_select">
                                         <tr>
-                                            <th>選択</th>
-                                            <td class="content">
+                                            <th>登録済みのデータを選択</th>
+                                            <td>
                                                 <p>食事を選択 </p>
-                                                <select name="food_name" style="background-color: rgb(17, 24, 39); color: rightgray;">
+                                                <select class="datas" name="food_name">
                                                     <option value="---">---</option>
                                                     <!-- 以下の部分はfoodテーブルからデータを持ってくる必要があります -->
                                                     @foreach ($foods as $food)
-                                                        <option name = "food_name" value="{{ $food->name }}" style="color:black;">{{ $food->name }}</option>
+                                                        <option name = "food_name" value="{{ $food->name }}" style="color:white;">{{ $food->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @csrf
                                                 <p>トレーニングを選択 </p>
-                                                <select name="training_name" style="color: black;">
+                                                <select class="datas" name="training_name">
                                                     <option value="---">---</option>
                                                     <!-- 以下の部分はtrainingテーブルからデータを持ってくる必要があります -->
                                                     @foreach ($trainings as $training)
-                                                        <option name="training_name" value="{{ $training->name }}" style="color: black;">{{ $training->name }}</option>
+                                                        <option name="training_name" value="{{ $training->name }}" style="color: white;">{{ $training->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 <label>
-                                                    <input type="number" min="0" name="training_minutes" value="" style="color: black;">
-                                                    トレーニング時間(分)
+                                                    <input class="datas" type="number" min="0" name="training_minutes" value="" style="color: white;" placeholder="トレーニング時間(分)">
                                                 </label>
+                                            </td>
+                                            <td style="position:bottom">
+                                                <div class="send-button">
+                                                    <input type="submit" value="送信">
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
-                                    <div class="send-button">
-                                        <input type="submit" value="送信">
-                                    </div>
                                 </form>
                                 <br>
 
                                 <form method="post" action="{{ route('food.store') }}">
                                     @csrf
-                                    <p>食事を登録 </p>
-                                    <input type="text" name="name" value="" style="color: black;" placeholder="料理名">
-                                    <select name="ingredient1_id" style="color: black;">
-                                        <option value="">---</option>
-                                        <?php
-                                        foreach ($ingredients as $ingredient) {
-                                            echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <input type="number" min="0" name="ingredient1_weight" value="" style="color: black;">
-                                    <select name="ingredient2_id" style="color: black;">
-                                        <option value="">---</option>
-                                        <?php
-                                        foreach ($ingredients as $ingredient) {
-                                            echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <input type="number" min="0" name="ingredient2_weight" value="" style="color: black;">
-                                    <select name="ingredient3_id" style="color: black;">
-                                        <option value="">---</option>
-                                        <?php
-                                        foreach ($ingredients as $ingredient) {
-                                            echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <input type="number" min="0" name="ingredient3_weight" value="" style="color: black;">
-                                    <select name="ingredient4_id" style="color: black;">
-                                        <option value="">---</option>
-                                        <?php
-                                        foreach ($ingredients as $ingredient) {
-                                            echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <input type="number" min="0" name="ingredient4_weight" value="" style="color: black;">
-                                    <select name="ingredient5_id" style="color: black;">
-                                        <option value="">---</option>
-                                        <?php
-                                        foreach ($ingredients as $ingredient) {
-                                            echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    <input type="number" min="0" name="ingredient5_weight" value="" style="color: black;">
-
-                                    <div class="button-container">
-                                        <input type="submit" value="登録">
-                                    </div>
+                                    <table class="create_food">
+                                        <tr>
+                                            <th>食事を登録 </th>
+                                            <td>
+                                                <p>料理名を入力</p>
+                                                <input type="text" class="datas" name="name" value="" style="color: white;" placeholder="料理名"><br>
+                                            </td>
+                                            <td>
+                                            <p>材料を入力</p>
+                                                <select name="ingredient1_id" class="datas" style="color: white;">
+                                                    <option value="">---</option>
+                                                    <?php
+                                                    foreach ($ingredients as $ingredient) {
+                                                        echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient1_weight" value="" style="color: whitek;"><br>
+                                                <select name="ingredient2_id" class="datas" style="color: white;">
+                                                    <option value="">---</option>
+                                                    <?php
+                                                    foreach ($ingredients as $ingredient) {
+                                                        echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient2_weight" value="" style="color: white;"><br>
+                                                <select name="ingredient3_id" class="datas" style="color: white;">
+                                                    <option value="">---</option>
+                                                    <?php
+                                                    foreach ($ingredients as $ingredient) {
+                                                        echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient3_weight" value="" style="color: white;"><br>
+                                                <select name="ingredient4_id" class="datas" style="color: white;">
+                                                    <option value="">---</option>
+                                                    <?php
+                                                    foreach ($ingredients as $ingredient) {
+                                                        echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient4_weight" value="" style="color: white;"><br>
+                                                <select name="ingredient5_id" class="datas" style="color: white;">
+                                                    <option value="">---</option>
+                                                    <?php
+                                                    foreach ($ingredients as $ingredient) {
+                                                        echo '<option value="' . $ingredient->id . '">' . $ingredient->name . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <input type="number" min="0" class="datas" placeholder="重さ(g)" name="ingredient5_weight" value="" style="color: whi;">
+                                            </td>
+                                            <td>
+                                                <div class="button-container">
+                                                    <input type="submit" value="登録">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>    
                                 </form>
                                 <br>
 
                                 <form method="post" action="{{ route('training.store') }}">
                                     @csrf
-                                    <p>トレーニングを登録 </p>
-                                    <input type="text" name="name" value="" style="color: black;" placeholder="トレーニング名">
-                                    <input type="number" min="0" name="calorie" value="１分間の消費カロリー" style="color: black;">
-                                    <div class="button-container">
-                                        <input type="submit" value="登録">
-                                    </div>
+                                    <table class="create_training">
+                                        <tr>
+                                            <th>トレーニングを登録</th>
+                                            <td>
+                                                <p>トレーニングを入力</p>
+                                                <input type="text" name="name" class="datas" value="" style="color: black;" placeholder="トレーニング名">
+                                                <input type="number" min="0" name="calorie" class="datas" value="" style="color: black;" placeholder="1分間のカロリー(kcal)">
+                                            </td>
+                                            <td>
+                                                <div class="button-container">
+                                                    <input type="submit" value="登録">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </form>
                             </table>
                         </div>
