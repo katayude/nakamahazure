@@ -44,7 +44,7 @@
                     <div class="progress-container">
                         <div class="progress-item">
                             <div class="progress-label">摂取カロリー</div>
-                            <progress value={{ $calorie }} max= {{ $requiredCalories }} ></progress>
+                            <progress value={{ $calorie }} max={{ $requiredCalories }}></progress>
                             <div class="progress-value">{{ $calorie }}kcal/{{ $requiredCalories }}kcal</div>
                         </div>
 
@@ -73,7 +73,8 @@
                     <style>
                         .flex-container {
                             display: flex;
-                            justify-content: space-between; /* アイテムの間に均等なスペースを作成 */
+                            justify-content: space-between;
+                            /* アイテムの間に均等なスペースを作成 */
                         }
 
                         .meal-item.blue-border {
@@ -81,15 +82,16 @@
                         }
 
                         .meal-item {
-                            width: 320px;  /* ボックスの幅を200pxに固定 */
-                            height: 50px;  /* ボックスの高さを50pxに固定 */
+                            width: 320px;
+                            /* ボックスの幅を200pxに固定 */
+                            height: 50px;
+                            /* ボックスの高さを50pxに固定 */
                         }
 
                         #chart {
                             width: 600px;
                             height: 400px;
                         }
-
                     </style>
 
                     <div class="flex-container">
@@ -119,50 +121,51 @@
                     </div>
 
 
-                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                        <script>
-                            var ctx = document.getElementById('chart').getContext('2d');
-                            var weights = @json($weights); // 体重データを変数に代入
-                            var currentWeight = weights.slice(-1)[0]; // 体重データの最後の値を取得
-                            var chart = new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: @json($dates),  // 日付データ
-                                    datasets: [{
-                                        label: '体重の推移',
-                                        data: @json($weights),  // 体重データ
-                                        backgroundColor: 'rgba(255, 255, 255, 1)',
-                                        borderColor: 'rgba(255, 255, 255, 1)',
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            min: currentWeight - 10,  // 今日の体重から10kg減った値
-                                            max: currentWeight + 10,  // 今日の体重から10kg増えた値
-                                            ticks: {
-                                                color: 'rgba(255, 255, 255, 1)'  // Y軸の目盛りの文字色を白に設定
-                                            }
-                                        },
-                                        x: {
-                                            ticks: {
-                                                color: 'rgba(255, 255, 255, 1)'  // X軸の目盛りの文字色を白に設定
-                                            }
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                        var ctx = document.getElementById('chart').getContext('2d');
+                        var weights = @json($weights); // 体重データを変数に代入
+                        var currentWeight = weights.slice(-1)[0]; // 体重データの最後の値を取得
+                        var chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: @json($dates), // 日付データ
+                                datasets: [{
+                                    label: '体重の推移',
+                                    data: @json($weights), // 体重データ
+                                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                                    borderColor: 'rgba(255, 255, 255, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        min: currentWeight - 10, // 今日の体重から10kg減った値
+                                        max: currentWeight + 10, // 今日の体重から10kg増えた値
+                                        ticks: {
+                                            color: 'rgba(255, 255, 255, 1)' // Y軸の目盛りの文字色を白に設定
                                         }
                                     },
-                                    plugins: {
-                                        legend: {
-                                            labels: {
-                                                color: 'rgba(255, 255, 255, 1)'  // 凡例の文字色を白に設定
-                                            }
+                                    x: {
+                                        ticks: {
+                                            color: 'rgba(255, 255, 255, 1)' // X軸の目盛りの文字色を白に設定
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            color: 'rgba(255, 255, 255, 1)' // 凡例の文字色を白に設定
                                         }
                                     }
                                 }
-                            });
-                        </script>
+                            }
+                        });
+                    </script>
 
                     </body>
+
                     </html>
 
 
@@ -173,7 +176,7 @@
                     <!--以下でキャラクターの表示-->
                     <br>
 
-                    <div class="container">
+                    <div class="character-container">
                         <div class="character">
                             <a href="{{ route('chat_gpt-chat') }}">
                                 <img src="{{ asset('images/character.png') }}" alt="キャラクター">

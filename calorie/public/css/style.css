@@ -77,12 +77,42 @@ ol li {
 
 .container {
     display: flex;
+    flex-direction: column;
+}
+
+.character-container {
+    display: flex;
     align-items: center;
 }
 
 .character img {
     width: 250px;
     /* 必要に応じてサイズを調整 */
+}
+
+.backgrond {
+    position: relative;
+}
+
+.background p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 40px;
+    font-weight: 700;
+    background-color: green;
+    /* 背景色 */
+    color: yellow;
+    /* 文字色 */
+    border-radius: 30px;
+    /* 角丸 */
+    padding: 2px;
+    transform: translate(-110%, -300%);
+}
+
+.background img {
+    height: 600px;
+    width: 600px;
 }
 
 .speech-bubble {
@@ -93,6 +123,17 @@ ol li {
     border: 2px solid #000;
     border-radius: 10px;
     max-width: 700px;
+    max-height: 300px;
+}
+
+.speech-bubble-welcom {
+    color: rgb(17, 24, 39);
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border: 2px solid #000;
+    border-radius: 10px;
+    max-width: 400px;
     max-height: 300px;
 }
 
@@ -113,5 +154,5 @@ ol li {
 h1 {
     /*線の種類（実線） 太さ 色*/
     border-bottom: solid 2px #e0e0e0;
-    font-size: 30px
+    font-size: 50px
 }
