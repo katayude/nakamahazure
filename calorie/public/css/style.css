@@ -93,7 +93,7 @@ ol li {
     border: 2px solid #000;
     border-radius: 10px;
     max-width: 700px;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .speech-bubble:before {
