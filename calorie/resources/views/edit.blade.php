@@ -143,18 +143,20 @@
                                     @elseif ($selectedData === 'training')
                                             <!-- Training データの表示 -->
                                         @foreach ($data as $training)
-                                            <tr>
-                                                <td style="color: white;">{{ $training->name }}</td>
-                                                <td>
-                                                    <form action="{{ route('training.delete', $training->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="delete-button">
-                                                            <button type="submit">×削除</button>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <span class="training-content" style="display:flex;">
+                                            <ul class="meal-list" style="list-style: none;">
+                                                <li class="meal-item" style="margin-left:30px">
+                                                    <span class="meal-name">{{ $training->name }}</span>
+                                                </li>
+                                            </ul>
+                                                <form action="{{ route('training.delete', $training->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <span class="delete-button">
+                                                        <button type="submit">×削除</button>
+                                                    </span>
+                                                </form>
+                                        </span>
                                         @endforeach
 
                                     @elseif ($selectedData === 'todays')
@@ -178,18 +180,20 @@
                                         </tr>
 
                                         @foreach ($data as $today)
-                                            <tr>
-                                                <td style="color: white;">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</td>
-                                                <td>
-                                                    <form action="{{ route('today.delete', $today->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="delete-button">
-                                                            <button type="submit" >×削除</button>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <span class="today-content" style="display:flex;">
+                                            <ul class="meal-list" style="list-style: none;">
+                                                <li class="meal-item" style="margin-left:30px">
+                                                    <span class="meal-name">{{ App\Models\Food::where('id', $today->food_id)->value('name') }}</span>
+                                                </li>
+                                            </ul>
+                                            <form action="{{ route('today.delete', $today->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <span class="delete-button">
+                                                    <button type="submit">×削除</button>
+                                                </span>
+                                            </form>
+                                        </span>
                                         @endforeach
 
 
@@ -213,18 +217,20 @@
                                             </td>
                                         </tr>
                                         @foreach ($data as $dairy)
-                                            <tr>
-                                                <td style="color: white;">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</td>
-                                                <td>
-                                                    <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="delete-button">
-                                                            <button type="submit" >×削除</button>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                        <span class="dairies-content" style="display:flex;">
+                                            <ul class="meal-list" style="list-style: none;">
+                                                <li class="meal-item" style="margin-left:30px">
+                                                    <span class="meal-name">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</span>
+                                                </li>
+                                            </ul>
+                                            <form action="{{ route('dairy.delete', $dairy->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <span class="delete-button">
+                                                    <button type="submit">×削除</button>
+                                                </span>
+                                            </form>
+                                        </span>
                                         @endforeach
                                     @else
                                         <!-- 何も選択されていない場合の表示 -->
