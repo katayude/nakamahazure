@@ -102,7 +102,7 @@
                                         @foreach ($data as $training)
                                         <span class="training-content" style="display:flex;">
                                             <ul class="meal-list" style="list-style: none;">
-                                                <li class="meal-item" style="margin-left:30px">
+                                                <li class="meal-item blue-border" style="margin-left:30px">
                                                     <span class="meal-name">{{ $training->name }}</span>
                                                 </li>
                                             </ul>
@@ -176,7 +176,7 @@
                                         @foreach ($data as $dairy)
                                         <span class="dairies-content" style="display:flex;">
                                             <ul class="meal-list" style="list-style: none;">
-                                                <li class="meal-item" style="margin-left:30px">
+                                                <li class="meal-item blue-border" style="margin-left:30px">
                                                     <span class="meal-name">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</span>
                                                 </li>
                                             </ul>

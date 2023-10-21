@@ -74,6 +74,9 @@ ol li {
     text-align: right;
     padding: 5px;
 }
+.meal-item.blue-border {
+    border-left: 8px solid blue;
+}
 
 .container {
     display: flex;

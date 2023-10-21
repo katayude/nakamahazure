@@ -78,7 +78,7 @@
                         }
 
                         .meal-item.blue-border {
-                            border-left: 5px solid blue;
+                            border-left: 8px solid blue;
                         }
 
                         .meal-item {
