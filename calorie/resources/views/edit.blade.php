@@ -77,11 +77,11 @@
                                         @csrf
                                         <div>
                                             <label for="weight" style="color: white;">体重:</label>
-                                            <input type="number" style="color: black;" name="weight" id="weight" required>
+                                            <input type="number" min="0" style="color: black;" name="weight" id="weight" required>
                                         </div>
                                         <div>
                                             <label for="height" style="color: white;">身長:</label>
-                                            <input type="number" style="color: black;" name="height" id="height" value="{{ old('height', session('height')) }}" required>
+                                            <input type="number" min="0" style="color: black;" name="height" id="height" value="{{ old('height', session('height')) }}" required>
                                         </div>
                                         <div>
                                             <label for="birthdate" style="color: white;">誕生日:</label>

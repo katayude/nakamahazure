@@ -53,7 +53,7 @@
                                 @endforeach
                             </select>
                             <label>
-                                <input type="number" name="training_minutes" value="" style="color: black;">
+                                <input type="number" min="0" name="training_minutes" value="" style="color: black;">
                                 トレーニング時間(分)
                             </label>
                             <div class="button-container">
@@ -74,7 +74,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="number" name="ingredient1_weight" value="" style="color: black;">
+                            <input type="number" min="0" name="ingredient1_weight" value="" style="color: black;">
                             <select name="ingredient2_id" style="color: black;">
                                 <option value="">---</option>
                                 <?php
@@ -83,7 +83,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="number" name="ingredient2_weight" value="" style="color: black;">
+                            <input type="number" min="0" name="ingredient2_weight" value="" style="color: black;">
                             <select name="ingredient3_id" style="color: black;">
                                 <option value="">---</option>
                                 <?php
@@ -92,7 +92,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="number" name="ingredient3_weight" value="" style="color: black;">
+                            <input type="number" min="0" name="ingredient3_weight" value="" style="color: black;">
                             <select name="ingredient4_id" style="color: black;">
                                 <option value="">---</option>
                                 <?php
@@ -101,7 +101,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="number" name="ingredient4_weight" value="" style="color: black;">
+                            <input type="number" min="0" name="ingredient4_weight" value="" style="color: black;">
                             <select name="ingredient5_id" style="color: black;">
                                 <option value="">---</option>
                                 <?php
@@ -110,7 +110,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="number" name="ingredient5_weight" value="" style="color: black;">
+                            <input type="number" min="0" name="ingredient5_weight" value="" style="color: black;">
 
                             <div class="button-container">
                                 <input type="submit" value="登録">
@@ -122,7 +122,7 @@
                                 @csrf
                                 <p>トレーニングを登録 </p>
                                 <input type="text" name="name" value="トレーニング名" style="color: black;">
-                                <input type="number" name="calorie" value="１分間の消費カロリー" style="color: black;">
+                                <input type="number" min="0" name="calorie" value="１分間の消費カロリー" style="color: black;">
                                 <div class="button-container">
                                     <input type="submit" value="登録">
                                 </div>
