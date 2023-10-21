@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('今日の記録') }}
+            {{ __('今日の記録の入力') }}
         </h2>
     </x-slot>
     <!DOCTYPE html>

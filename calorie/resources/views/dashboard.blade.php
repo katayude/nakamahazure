@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('記録') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -9,7 +9,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if(isset($date))
-                        <p>You clicked the date: {{ $date }}</p>
+                        <p>{{ $date }}</p>
 
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js" type="text/javascript"></script>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -37,7 +37,7 @@
                                     strokeColor : "rgba(151,187,205,0.9)",
                                     highlightFill : "rgba(64,96,255,0.75)",
                                     highlightStroke : "rgba(64,96,255,1)",
-                                    data : [95]
+                                    data : [{{ $requiredCalories }}]
                                 }
                             ]
                         }
@@ -57,7 +57,7 @@
                                     strokeColor : "rgba(151,187,205,0.9)",
                                     highlightFill : "rgba(64,96,255,0.75)",
                                     highlightStroke : "rgba(64,96,255,1)",
-                                    data : [95]
+                                    data : [{{$protein}}]
                                 }
                             ]
                         }
@@ -78,7 +78,7 @@
                                     strokeColor : "rgba(151,187,205,0.9)",
                                     highlightFill : "rgba(64,96,255,0.75)",
                                     highlightStroke : "rgba(64,96,255,1)",
-                                    data : [95]
+                                    data : [{{$carbohydrate}}]
                                 }
                             ]
                         }
@@ -99,7 +99,7 @@
                                     strokeColor : "rgba(151,187,205,0.9)",
                                     highlightFill : "rgba(64,96,255,0.75)",
                                     highlightStroke : "rgba(64,96,255,1)",
-                                    data : [95]
+                                    data : [{{$fat}}]
                                 }
                             ]
                         }
@@ -122,7 +122,7 @@
                                     strokeColor : "rgba(151,187,205,0.9)",
                                     highlightFill : "rgba(64,96,255,0.75)",
                                     highlightStroke : "rgba(64,96,255,1)",
-                                    data : [95]
+                                    data : [{{$salt}}]
                                 }
                             ]
                         }
@@ -147,11 +147,13 @@
                         }
                     </script>
                     <!-- データ -->
-                    <p>摂取カロリー: {{ $totalNutrition->total_calorie }} kcal</p>
-                    <p>タンパク質: {{ $totalNutrition->total_protein }} grams</p>
-                    <p>炭水化物: {{ $totalNutrition->total_carbohydrate }} grams</p>
-                    <p>脂質: {{ $totalNutrition->total_fat }} grams</p>
-                    <p>塩分: {{ $totalNutrition->total_solt}} units</p>
+                    <p>摂取カロリー: {{ $totalNutrition->total_calorie }} kcal / {{ $requiredCalories }} kcal</p>
+                    <p>タンパク質: {{ $totalNutrition->total_protein }} g / {{$protein}} g</p>
+                    <p>炭水化物: {{ $totalNutrition->total_carbohydrate }} g / {{$carbohydrate}} g</p>
+                    <p>脂質: {{ $totalNutrition->total_fat }} g / {{$fat}} g</p>
+                    <p>塩分: {{ $totalNutrition->total_solt}} g / {{$salt}} g</p>
+                    <p>トレーニング: {{ $consumeCalories }} kcal</p>
+                    <p>体重: {{ $weight }}kg</p>
 
                     @else
                         {{ __("You're logged in!") }}
