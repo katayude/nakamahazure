@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Ingredient;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
@@ -57,6 +58,7 @@ class FoodController extends Controller
         $total_calorie = array_sum($ingredient_calories);
 
         $foodData = [
+            'user_id' => Auth::id(),
             'name' => $request->input('name'),
             'calorie' => $total_calorie,
         ];
