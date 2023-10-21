@@ -5,51 +5,8 @@
     </h2>
   </x-slot>
     <head>
+        <meta charset='utf-8' />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <style>
-            /*Pushボタン*/ 
-            .push-button {
-                margin-bottom: 15px;
-                display: inline-block; 
-                background-color: white ; 
-                border-radius: 20px;
-                padding: 5px 10px;
-            }
-            .push-button button[type="submit"] {
-                background-color: transparent; 
-                border: none; 
-                color: black; 
-            }
-            .push-button:hover{
-                background-color: gray;
-                cursor: pointer;
-            }
-            /* 削除ボタン */
-            .delete-button{
-                margin:5px;
-                height:40px;
-                background-color: red ; 
-                border-radius: 5px;
-                padding: 5px 10px;
-            }
-            .delete-button button[type="submit"] {
-                background-color: transparent; 
-                border: none; 
-            }
-            .delete-button:hover{
-                background-color: maroon;
-                cursor: pointer;
-            }
-            .meal-list {
-                list-style-type: none;
-                padding: 0;
-            }
-            .meal-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-        </style>
     </head>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -77,7 +34,7 @@
                                     <button type="submit">Push</button>
                                 </div>
                             </div>
-                            </form>
+                        </form>
                             <table>
                                 <tbody>
                                     @if ($selectedData === 'user_data')
@@ -145,7 +102,7 @@
                                         @foreach ($data as $training)
                                         <span class="training-content" style="display:flex;">
                                             <ul class="meal-list" style="list-style: none;">
-                                                <li class="meal-item" style="margin-left:30px">
+                                                <li class="meal-item blue-border" style="margin-left:30px">
                                                     <span class="meal-name">{{ $training->name }}</span>
                                                 </li>
                                             </ul>
@@ -160,25 +117,20 @@
                                         @endforeach
 
                                     @elseif ($selectedData === 'todays')
-                                            <!-- Todays データの表示 -->
-                                        <tr>
-                                            <td>
-                                                <form action="{{ route('date.show') }}" method="GET">
-                                                    @csrf
-                                                    <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
-                                                        <label for="selected_date"><font color="white">日付を選択:</font></label>
-                                                        <div class="flex">
-                                                            <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
-                                                        </div>
-                                                    </div>
-                                                    <div class="push-button">
-                                                        <button type="submit">Push</button>
-                                                    </div>
-                                                    <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
-                                                </form>
-                                            </td>
-                                        </tr>
-
+                                        <!-- Todays データの表示 -->
+                                        <form action="{{ route('date.show') }}" method="GET">
+                                            @csrf
+                                            <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
+                                                <label for="selected_date"><font color="white">日付を選択:</font></label>
+                                                <div class="flex">
+                                                    <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
+                                                </div>
+                                            </div>
+                                            <div class="push-button">
+                                                <button type="submit">Push</button>
+                                            </div>
+                                            <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
+                                        </form>
                                         @foreach ($data as $today)
                                         <span class="today-content" style="display:flex;">
                                             <ul class="meal-list" style="list-style: none;">
@@ -198,28 +150,24 @@
 
 
                                     @elseif ($selectedData === 'dairies')
-                                            <!-- Dairies データの表示 -->
-                                        <tr>
-                                            <td>
-                                                <form action="{{ route('date.show') }}" method="GET">
-                                                    @csrf
-                                                    <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
-                                                        <label for="selected_date"><font color="white">日付を選択:</font></label>
-                                                        <div class="flex">
-                                                            <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
-                                                        </div>
+                                        <!-- Dairies データの表示 -->
+                                            <form action="{{ route('date.show') }}" method="GET">
+                                                @csrf
+                                                <div class="flex flex-col mb-4" id="dateFields"> <!-- "display: none;" を削除 -->
+                                                    <label for="selected_date"><font color="white">日付を選択:</font></label>
+                                                    <div class="flex">
+                                                        <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
                                                     </div>
-                                                    <div class="push-button">
-                                                        <button type="submit">Push</button>
-                                                    </div>
-                                                    <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                </div>
+                                                <div class="push-button">
+                                                    <button type="submit">Push</button>
+                                                </div>
+                                                <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
+                                            </form>
                                         @foreach ($data as $dairy)
                                         <span class="dairies-content" style="display:flex;">
                                             <ul class="meal-list" style="list-style: none;">
-                                                <li class="meal-item" style="margin-left:30px">
+                                                <li class="meal-item blue-border" style="margin-left:30px">
                                                     <span class="meal-name">{{ App\Models\Training::where('id', $dairy->training_id)->value('name') }}</span>
                                                 </li>
                                             </ul>

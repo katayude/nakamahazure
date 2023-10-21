@@ -74,6 +74,9 @@ ol li {
     text-align: right;
     padding: 5px;
 }
+.meal-item.blue-border {
+    border-left: 8px solid blue;
+}
 
 .container {
     display: flex;
@@ -155,4 +158,106 @@ h1 {
     /*線の種類（実線） 太さ 色*/
     border-bottom: solid 2px #e0e0e0;
     font-size: 50px
+}
+.button-container {
+    display: inline-block; 
+    background-color: white ; 
+    border-radius: 20px;
+    padding: 5px 10px; /
+}
+.button-container input[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+    color: black; 
+}
+.button-container:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.push-button {
+    margin-bottom: 15px;
+    display: inline-block; 
+    background-color: white ; 
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+.push-button button[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+    color: black; 
+}
+.push-button:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.send-button {
+    margin:5px;
+    width: 70px;
+    text-align: center;
+    display: inline-block;
+    background-color: green;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+.send-button button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+.send-button:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+/* 削除ボタン */
+.delete-button{
+    margin:5px;
+    height:40px;
+    background-color: red ; 
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.delete-button button[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+}
+.delete-button:hover{
+    background-color: maroon;
+    cursor: pointer;
+}
+table.create_select {
+    padding: 10px;
+    width: 85%;
+    height: 200px;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    border-top:1px solid lightgray ;
+}
+table.create_select th{
+    width:20%;
+}
+table.create_food {
+    padding: 10px;
+    width: 85%;
+    height: 330px;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+table.create_food th {
+    width: 20%;
+}
+table.create_food td.ingredients {
+    width: 50%;
+}
+table.create_food td.button {
+    position:right 30%;
+}
+table.create_training {
+    padding: 10px;
+    width: 85%;
+    height: 120px;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
