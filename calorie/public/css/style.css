@@ -156,3 +156,50 @@ h1 {
     border-bottom: solid 2px #e0e0e0;
     font-size: 50px
 }
+.button-container {
+    display: inline-block; 
+    background-color: white ; 
+    border-radius: 20px;
+    padding: 5px 10px; /
+}
+.button-container input[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+    color: black; 
+}
+.button-container:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+.push-button {
+    margin-bottom: 15px;
+    display: inline-block; 
+    background-color: white ; 
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+.push-button button[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+    color: black; 
+}
+.push-button:hover{
+    background-color: gray;
+    cursor: pointer;
+}
+/* 削除ボタン */
+.delete-button{
+    margin:5px;
+    height:40px;
+    background-color: red ; 
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.delete-button button[type="submit"] {
+    background-color: transparent; 
+    border: none; 
+}
+.delete-button:hover{
+    background-color: maroon;
+    cursor: pointer;
+}

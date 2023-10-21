@@ -5,51 +5,8 @@
     </h2>
   </x-slot>
     <head>
+        <meta charset='utf-8' />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <style>
-            /*Pushボタン*/ 
-            .push-button {
-                margin-bottom: 15px;
-                display: inline-block; 
-                background-color: white ; 
-                border-radius: 20px;
-                padding: 5px 10px;
-            }
-            .push-button button[type="submit"] {
-                background-color: transparent; 
-                border: none; 
-                color: black; 
-            }
-            .push-button:hover{
-                background-color: gray;
-                cursor: pointer;
-            }
-            /* 削除ボタン */
-            .delete-button{
-                margin:5px;
-                height:40px;
-                background-color: red ; 
-                border-radius: 5px;
-                padding: 5px 10px;
-            }
-            .delete-button button[type="submit"] {
-                background-color: transparent; 
-                border: none; 
-            }
-            .delete-button:hover{
-                background-color: maroon;
-                cursor: pointer;
-            }
-            .meal-list {
-                list-style-type: none;
-                padding: 0;
-            }
-            .meal-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-        </style>
     </head>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

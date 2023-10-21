@@ -7,23 +7,8 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <style>
-            .button-container {
-                display: inline-block; 
-                background-color: white ; 
-                border-radius: 20px;
-                padding: 5px 10px; /
-            }
-            .button-container input[type="submit"] {
-                background-color: transparent; 
-                border: none; 
-                color: black; 
-            }
-            .button-container:hover{
-                background-color: gray;
-                cursor: pointer;
-            }
-        </style>
+        <meta charset='utf-8' />
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
         <div class="py-12">
