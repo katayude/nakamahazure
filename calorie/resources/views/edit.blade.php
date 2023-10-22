@@ -73,8 +73,8 @@
                                                     <option value="女"{{ session('gender') == '女' ? 'selected' : '' }}>女性</option>
                                                 </select>
                                             </div>
-                                            <div class="push-button">
-                                                <button type="submit">Push</button>
+                                            <div class="send-button">
+                                                <button type="submit">決定</button>
                                             </div>
                                         </form>
 
@@ -126,8 +126,8 @@
                                                     <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
                                                 </div>
                                             </div>
-                                            <div class="push-button">
-                                                <button type="submit">Push</button>
+                                            <div class="send-button">
+                                                <button type="submit">決定</button>
                                             </div>
                                             <input type="hidden" name="selected_data" value="todays"> <!-- 選択データを送信 -->
                                         </form>
@@ -159,8 +159,8 @@
                                                         <input type="date" style="color: black;" name="selected_date" value="{{ session('selected_date') }}">
                                                     </div>
                                                 </div>
-                                                <div class="push-button">
-                                                    <button type="submit">Push</button>
+                                                <div class="send-button">
+                                                    <button type="submit">決定</button>
                                                 </div>
                                                 <input type="hidden" name="selected_data" value="dairies"> <!-- 選択データを送信 -->
                                             </form>
