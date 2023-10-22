@@ -142,8 +142,9 @@ class RecodeController extends Controller
 
         session(['selected_data' => $selectedData]);
         session(['selected_date' => $selectedDate]);
+        session([$user]);
 
-        return view('edit', compact('selectedData','selectedDate' , 'data'));
+        return view('edit', compact('selectedData','selectedDate' , 'data','user'));
     }
 
     public function infor(Request $request)
@@ -157,17 +158,23 @@ class RecodeController extends Controller
 
     public function deleteFood(Request $request, $id) {
         // データを削除する処理
+        $user = auth()->user();
         Food::destroy($id);
         $selectedData = 'food';
-        $data = Food::all();
+        
+        // ログインしているユーザーに関連する Food データのみを取得
+        $data = Food::where('user_id', $user->id)->get();
+
         return view('edit', compact('selectedData', 'data'));
     }
 
+
     public function deleteTraining(Request $request, $id) {
         // データを削除する処理
+        $user = auth()->user();
         Training::destroy($id);
         $selectedData = 'food';
-        $data = Training::all();
+        $data = Training::where('user_id', $user->id)->get();
         return view('edit', compact('selectedData', 'data'));
     }
 
