@@ -9,18 +9,6 @@
     <head>
         <meta charset='utf-8' />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <style>
-            select.datas{
-                background-color: rgb(31,41,55);
-                color: white;
-                margin-bottom: 15px;
-                margin-left: 20px;
-            }
-            input.datas{
-                background-color: rgb(31,41,55);
-                color: white;
-            }
-        </style>
     </head>
     <body>
         <div class="py-12">
@@ -72,7 +60,7 @@
                                         <tr>
                                             <th>食事を登録 </th>
                                             <td>
-                                                <p>料理名を入力</p>
+                                            <p>料理名を入力</p>
                                                 <input type="text" class="datas" name="name" value="" style="color: white;" placeholder="料理名"><br>
                                             </td>
                                             <td class="ingredients">
@@ -140,7 +128,7 @@
                                             <th>トレーニングを登録</th>
                                             <td class="training">
                                                 <p>トレーニングを入力</p>
-                                                <input type="text" name="name" class="datas" value="" style="color: black;" placeholder="トレーニング名">
+                                                <input type="text" name="name" class="datas" value="" style="color: white;" placeholder="トレーニング名">
                                                 <input type="number" min="0" name="calorie" class="datas" value="" style="color: black;" placeholder="1分間のカロリー(kcal)">
                                             </td>
                                             <td>
