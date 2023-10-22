@@ -177,14 +177,14 @@ h1 {
 .push-button {
     margin-bottom: 15px;
     display: inline-block; 
-    background-color: white ; 
+    background-color: green ; 
     border-radius: 20px;
     padding: 5px 10px;
 }
 .push-button button[type="submit"] {
     background-color: transparent; 
     border: none; 
-    color: black; 
+    color: white;
 }
 .push-button:hover{
     background-color: gray;
@@ -202,7 +202,7 @@ h1 {
 .send-button button[type="submit"] {
     background-color: transparent;
     border: none;
-    color: black;
+    color: white;
 }
 .send-button:hover {
     background-color: gray;
@@ -230,8 +230,8 @@ table.create_select {
     width: 85%;
     height: 200px;
     margin: 0 auto;
-    border-bottom: 1px solid lightgray;
-    border-top:1px solid lightgray ;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-top:1px solid rgb(224, 224, 224) ;
 }
 table.create_select th{
     width:20%;
@@ -260,4 +260,15 @@ table.create_training {
     margin: 0 auto;
     border-bottom: 1px solid lightgray;
     border-top: 1px solid lightgray;
+}
+select.datas {
+    background-color: rgb(31, 41, 55);
+    color: white;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+input.datas {
+    background-color: rgb(31, 41, 55);
+    color: white;
 }

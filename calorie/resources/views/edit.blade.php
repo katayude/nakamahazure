@@ -20,7 +20,7 @@
                                 <div class="flex flex-col mb-4">
                                     <label for="selected_data"><font color="white">データを選択:</font></label>
                                     <div class="flex">
-                                        <select name="selected_data" id="selected_data" style="width: 130px; color:black ">
+                                        <select name="selected_data" class="datas" id="selected_data" style="width: 130px; color:white ">
                                             <option value="">---</option>
                                             <option value="user_data" {{ session('selected_data') === 'user_data' ? 'selected' : '' }}>user_data</option>
                                             <option value="food" {{ session('selected_data') === 'food' ? 'selected' : '' }}>Food</option>
@@ -30,8 +30,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="push-button">
-                                    <button type="submit">Push</button>
+                                <div class="send-button">
+                                    <button type="submit">決定</button>
                                 </div>
                             </div>
                         </form>
